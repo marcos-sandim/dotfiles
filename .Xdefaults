@@ -46,6 +46,7 @@ urxvt*cursorColor: #b092a4
 URxvt*tintColor:        #EEEEEE
 URxvt*background:       #000000
 URxvt*foreground:       #e1e2db
+URxvt*cursorBlink:       true
 
 !! Zenburn
 !URxvt*background:  #3F3F3F
@@ -74,6 +75,28 @@ URxvt*foreground:       #e1e2db
 !! bright-cyan + bright-white
 !URxvt*color14:     #93e0e3
 !URxvt*color15:     #ffffff
+
+!!! Twilight
+!! Day
+!*foreground:  #f8f8f8
+!*background:  #181818
+!*cursorColor: #cacaca
+!*color0:      #5f5a60
+!*color8:      #5f5a60
+!*color4:      #cf6a4c
+!*color12:     #cf6a4c
+!*color1:      #8f9d6a
+!*color9:      #8f9d6a
+!*color2:      #e9c062
+!*color10:     #e9c062
+!*color3:      #8996a8
+!*color11:     #8996a8
+!*color5:      #9b859d
+!*color13:     #9b859d
+!*color6:      #afc4db
+!*color14:     #afc4db
+!*color7:      #f8f8f8
+!*color15:     #f8f8f8
 
 
 ! Slate
@@ -411,7 +434,7 @@ xpdf*viKeys:     on
 xterm*internalBorder:        0
 xterm*loginShell:         true
 xterm*scrollBar:         false
-xterm*cursorBlink:       false
+xterm*cursorBlink:       true
 !xterm*geometry:         80x26
 xterm*saveLines:         65535
 xterm*dynamicColors:        on

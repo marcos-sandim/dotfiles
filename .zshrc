@@ -31,9 +31,9 @@ recursive_php_lint() {
 alias run_acl='php application/modules/Acl/scripts/assets/acl.php'
 alias run_acl_deploy='php application/modules/Acl/scripts/acl_deploy.php'
 alias set_kbd_m='sudo setxkbmap -model 105-key -layout us -variant intl'
-alias svnc="svn st --ignore-externals | grep ^[[:space:]C\!\~]"
+alias svnc="svn st --ignore-externals | grep '^[[:space:]C\!\~]'"
 alias svnnv='svn st --ignore-externals | grep "^?"'
-alias svnm="svn st --ignore-externals | grep ^[[:space:]ACDIMR\!\~]"
+alias svnm="svn st --ignore-externals | grep '^[[:space:]ACDIMR\!\~]'"
 alias svnst="svn st --ignore-externals"
 alias svnup="svn up --ignore-externals"
 alias svn_colordiff="svn diff | colordiff | less -R"
