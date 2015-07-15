@@ -33,10 +33,10 @@ URxvt*shading:          30
 URxvt*termName:         rxvt-unicode
 URxvt*secondaryScroll:  true
 URxvt*perl-lib:         /usr/lib/urxvt/perl/
-URxvt*perl-ext-common:  default,matcher,searchable-scrollback
+URxvt*perl-ext-common:  default,matcher,searchable-scrollback,clipboard,selection-to-clipboard
 URxvt*urlLauncher:      chromium-browser
 URxvt*matcher.button:   1
-URxvt*cutchars:         `"()'*<>[]{|}
+! URxvt*cutchars:         `"()'*<>[]{|}
 URxvt*visualBell:       false
 URxvt*keysym.C-u:       perl:matcher
 URxvt*urgentOnBell:     true
