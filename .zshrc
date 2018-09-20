@@ -5,7 +5,20 @@ SAVEHIST=1000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/marcos_sandim/.zshrc'
+#zstyle :compinstall filename '/home/marcos_sandim/.zshrc'
+
+export TERM="xterm-256color"
+
+setopt HIST_IGNORE_ALL_DUPS
+
+export ZSH="/home/sandim/.oh-my-zsh"
+
+#ZSH_THEME="powerline"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+
+plugins=(fzf-zsh docker notify)
+
+source $ZSH/oh-my-zsh.sh
 
 autoload -Uz compinit
 compinit
@@ -13,7 +26,7 @@ compinit
 
 #shopt -s checkwinsize
 
-VISUAL=vim
+VISUAL=nvim
 
 export VISUAL
 
@@ -22,6 +35,8 @@ export VISUAL
 #alias la='ls -A'
 alias l='ls -CF'
 alias la="ls -lAF"
+
+alias xopen='xdg-open'
 
 recursive_php_lint() {
     #do things with parameters like $1 such as
@@ -59,11 +74,17 @@ REPORTTIME=5
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git svn
-zstyle ':vcs_info:*' formats "(%{$fg[grey]%}%s %{$reset_color%}%r %{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%})"
-precmd() {
-    vcs_info
-}
+zstyle ':vcs_info:*' disable-patterns "${(b)HOME}/repos/(Particle_Resampling|BPart)(|/*)"
+#zstyle ':vcs_info:*' formats "(%{$fg[grey]%}%s %{$reset_color%}%r %{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%})"
+#precmd() {
+#    vcs_info
+#}
 
-setopt PROMPT_SUBST
-PROMPT='%(!.%F{red}.%F{cyan})%n%f@%F{yellow}%m
-    %f%~${vcs_info_msg_0_} %(!.%F{red}.%F{cyan})%#%f '
+zstyle ':notify:*' error-icon "$HOME/200_s.gif"
+zstyle ':notify:*' error-title "wow such #fail"
+zstyle ':notify:*' success-icon "$HOME/b55a1805f5650495a74202279036ecd2.jpg"
+zstyle ':notify:*' success-title "very #success. wow"
+
+#setopt PROMPT_SUBST
+#PROMPT='%(!.%F{red}.%F{cyan})%n%f@%F{yellow}%m
+#    %f%~${vcs_info_msg_0_} %(!.%F{red}.%F{cyan})%#%f '
