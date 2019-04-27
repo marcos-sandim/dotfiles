@@ -16,7 +16,7 @@ export ZSH="/home/sandim/.oh-my-zsh"
 #ZSH_THEME="powerline"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
-plugins=(fzf-zsh docker notify)
+plugins=(fzf docker thefuck)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -40,8 +40,11 @@ alias xopen='xdg-open'
 
 recursive_php_lint() {
     #do things with parameters like $1 such as
-    find -L $1 -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+    # find -L $1 -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n 1 -P 4 php -l
+    docker run --rm -ti --name composer -v $(pwd):/app composer bash -c "find -L /app -name '*.php' -not -path '/app/vendor/*' -print0 | xargs -0 -n 1 -P 4 -I{} php -l {}"
 }
+
+phan() { docker run -v $(pwd):/mnt/src --rm -u "$(id -u):$(id -g)" cloudflare/phan:latest $@; return $?; }
 
 alias run_acl='php application/modules/Acl/scripts/assets/acl.php'
 alias run_acl_deploy='php application/modules/Acl/scripts/acl_deploy.php'
@@ -88,3 +91,5 @@ zstyle ':notify:*' success-title "very #success. wow"
 #setopt PROMPT_SUBST
 #PROMPT='%(!.%F{red}.%F{cyan})%n%f@%F{yellow}%m
 #    %f%~${vcs_info_msg_0_} %(!.%F{red}.%F{cyan})%#%f '
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
