@@ -227,6 +227,7 @@ bindsym $MOD+l exec --no-startup-id i3lock -i /home/sandim/Desktop/doge_shop_thu
 # bindsym $alt+F4 exec kill
 
 focus_follows_mouse no
+mouse_warping none
 
 # startup commands
 exec --no-startup-id dropbox start
@@ -236,9 +237,14 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec_always --no-startup-id xrandr --output LVDS1 --auto --output VGA1 --off
 #exec_always --no-startup-id xsetroot -solid "#333333"
 
-# exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 exec --no-startup-id gnome-keyring-daemon
 # exec --no-startup-id gnome-settings-daemon
+
+exec_always --no-startup-id xinput --set-prop 'DELL0829:00 06CB:7E92 Touchpad' "libinput Natural Scrolling Enabled" 1
+exec_always --no-startup-id xinput --set-prop 'DELL0829:00 06CB:7E92 Touchpad' "libinput Tapping Enabled" 1
+exec_always --no-startup-id xinput --set-prop "MX Master Mouse" "libinput Natural Scrolling Enabled" 1
+exec_always --no-startup-id xinput --set-prop "pointer:Logitech MX Master" "libinput Natural Scrolling Enabled" 1
 
 # Screen Shots
 bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
@@ -264,3 +270,17 @@ client.focused_inactive     $bg        $bg         $ac
 client.urgent               $rd        $rd         $tx
 
 font pango:DejaVu Sans Regular 8
+
+
+for_window [class="Nautilus" instance="nautilus"] floating enable
+for_window [class="Gedit" instance="gedit"] floating enable
+for_window [class="keepassxc" instance="keepassxc"] floating enable
+for_window [class="Gcr-viewer" instance="gcr-viewer"] floating enable
+for_window [class="Gnome-calculator" instance="gnome-calculator"] floating enable
+
+
+# Start clipster daemon
+exec --no-startup-id clipster -d
+
+# shortcut to selection widget (primary)
+bindsym $mod+c exec clipster -sp

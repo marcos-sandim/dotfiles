@@ -34,6 +34,8 @@ URxvt*urgentOnBell:     true
 !URxvt*background:       #000000
 !URxvt*foreground:       #e1e2db
 URxvt*cursorBlink:       true
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
 ! special
 *.foreground:   #f8f8f2

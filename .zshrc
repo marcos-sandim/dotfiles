@@ -44,7 +44,17 @@ recursive_php_lint() {
     docker run --rm -ti --name composer -v $(pwd):/app composer bash -c "find -L /app -name '*.php' -not -path '/app/vendor/*' -print0 | xargs -0 -n 1 -P 4 -I{} php -l {}"
 }
 
-phan() { docker run -v $(pwd):/mnt/src --rm -u "$(id -u):$(id -g)" cloudflare/phan:latest $@; return $?; }
+phan() {
+    docker run -v $(pwd):/mnt/src --rm -u "$(id -u):$(id -g)" cloudflare/phan:latest $@; return $?;
+}
+
+#docker run -d -v $(pwd):/src -w /src --name pg_client postgres:9.5-alpine psql
+#docker run -it --rm --network="bridge" jbergknoff/postgresql-client postgresql://arquivei:q1w2e3@172.17.0.3:5432/arquivei
+#docker run -it --rm --network="bridge" -e "PGPASSWORD=q1w2e3" jbergknoff/postgresql-client -U arquivei -h 172.17.0.3 -p 5432 -d arquivei
+#psql() {
+#    docker run -v $(pwd):/src -w /src pg_client psql $@; return $?;
+#}
+
 
 alias run_acl='php application/modules/Acl/scripts/assets/acl.php'
 alias run_acl_deploy='php application/modules/Acl/scripts/acl_deploy.php'
@@ -93,3 +103,8 @@ zstyle ':notify:*' success-title "very #success. wow"
 #    %f%~${vcs_info_msg_0_} %(!.%F{red}.%F{cyan})%#%f '
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+PATH="$HOME/repos/rgit/bin:$PATH"
+
+export PATH
