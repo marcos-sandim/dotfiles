@@ -37,42 +37,72 @@ URxvt*cursorBlink:       true
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
+
+! Seti_UX
+! Ansi0Color:  #15171C
+! Ansi1Color:  #F82939
+! Ansi10Color:  #22FF56
+! Ansi11Color:  #FCC146
+! Ansi12Color:  #2D4562
+! Ansi13Color:  #6F4EBC
+! Ansi14Color:  #118CC7
+! Ansi15Color:  #828C95
+! Ansi2Color:  #22FF56
+! Ansi3Color:  #FCC146
+! Ansi4Color:  #2D4562
+! Ansi5Color:  #6F4EBC
+! Ansi6Color:  #118CC7
+! Ansi7Color:  #838C95
+! Ansi8Color:  #15171C
+! Ansi9Color:  #F82939
+! BackgroundColor:  #0B0D0E
+! BadgeColor:  #FF0000
+! BoldColor:  #F9FBFE
+! CursorColor:  #F6F7EE
+! CursorGuideColor:  #0745AC
+! CursorTextColor:  #20242D
+! ForegroundColor:  #516F77
+! LinkColor:  #0544AC
+! SelectedTextColor:  #977917
+! SelectionColor:  #FEECA7
+! TabColor:  #0B0D0E
+
 ! special
-*.foreground:   #f8f8f2
-*.background:   #272822
-*.cursorColor:  #f8f8f2
+*.foreground:   #a5e2f2
+*.background:   #0b0d0e
+*.cursorColor:  #f6f7ee
 
 ! black
-*.color0:       #272822
-*.color8:       #75715e
+*.color0:       #15171c
+*.color8:       #15171c
 
 ! red
-*.color1:       #f92672
-*.color9:       #f92672
+*.color1:       #f82939
+*.color9:       #f82939
 
 ! green
-*.color2:       #a6e22e
-*.color10:      #a6e22e
+*.color2:       #22ff56
+*.color10:      #22ff56
 
 ! yellow
-*.color3:       #f4bf75
-*.color11:      #f4bf75
+*.color3:       #fcc146
+*.color11:      #fcc146
 
 ! blue
-*.color4:       #66d9ef
-*.color12:      #66d9ef
+*.color4:       #2d4562
+*.color12:      #2d4562
 
 ! magenta
-*.color5:       #ae81ff
-*.color13:      #ae81ff
+*.color5:       #6f4ebc
+*.color13:      #6f4ebc
 
 ! cyan
-*.color6:       #a1efe4
-*.color14:      #a1efe4
+*.color6:       #118cc7
+*.color14:      #118cc7
 
 ! white
-*.color7:       #f8f8f2
-*.color15:      #f9f8f5
+*.color7:       #838c95
+*.color15:      #828c95
 
 
 !-------------------------------------------------------------------------------

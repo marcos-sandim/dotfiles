@@ -1,5 +1,5 @@
 rofi.combi-modi:    window,drun,ssh
 rofi.font:          Lato 16
-rofi.modi:          combi,drun,run,ssh
+rofi.modi:          combi,drun,run,ssh,window
 
 rofi.theme: /usr/local/share/rofi/themes/android_notification.rasi

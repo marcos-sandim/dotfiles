@@ -128,7 +128,9 @@ bindsym $mod+Shift+9 move container to workspace number 9; workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10; workspace number 10
 
 #bindsym $mod+Tab workspace back_and_forth
-bindsym $alt+Tab exec --no-startup-id rofi -show window -show-icons -sort
+#bindsym $alt+Tab exec --no-startup-id rofi -show window -show-icons -sort
+#bindsym $alt+Tab exec --no-startup-id "xdotool search --onlyvisible --sync --limit 1 --class Rofi keyup --delay 0 Tab key --delay 0 Tab keyup & rofi -show window -show-icons -sort -kb-cancel 'Alt+Escape,Escape' -kb-accept-entry '!Alt-Tab,!Alt_L,!Alt+Alt_L,Return' -kb-row-down 'Alt+Tab,Alt+Down' -kb-row-up 'Alt+ISO_Left_Tab,Alt+Shift+Tab,Alt+Up' "
+bindsym $alt+Tab exec --no-startup-id "rofi -show window -show-icons -sort -kb-cancel 'Alt+Escape,Escape' -kb-accept-entry '!Alt-Tab,!Alt_L,!Alt+Alt_L,Return' -kb-row-down 'Alt+Tab,Alt+Down' -kb-row-up 'Alt+ISO_Left_Tab,Alt+Shift+Tab,Alt+Up' "
 
 # rename workspace 1 to "1: www"
 
@@ -220,14 +222,15 @@ bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
 # bindsym $MOD+l exec --no-startup-id i3lock -c 000000
 # bindsym $MOD+l exec --no-startup-id i3lock -i $(shuf -n1 -e /home/marcos_sandim/Pictures/tiled_wp/*) -t
 #bindsym $MOD+l exec --no-startup-id i3lock -i /home/marcos_sandim/Pictures/tiled_wp/tile8.png -t
-bindsym $MOD+l exec --no-startup-id i3lock -i /home/sandim/Desktop/doge_shop_thumb.png -t
+#bindsym $MOD+l exec --no-startup-id i3lock -i /home/sandim/Desktop/doge_shop_thumb.png -t
+bindsym $MOD+l exec --no-startup-id i3lock -i /tmp/wallpaper.png -c 222222
 # bindsym $MOD+e exec --no-startup-id nautilus
 
 # bindsym $alt+Tab exec --no-startup-id ~/.i3/quickswitch.rb
 # bindsym $alt+F4 exec kill
 
 focus_follows_mouse no
-mouse_warping none
+#mouse_warping none
 
 # startup commands
 exec --no-startup-id dropbox start
@@ -238,6 +241,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec_always --no-startup-id xsetroot -solid "#333333"
 
 exec --no-startup-id nm-applet
+exec_always --no-startup-id deadd-notification-center
 exec --no-startup-id gnome-keyring-daemon
 # exec --no-startup-id gnome-settings-daemon
 

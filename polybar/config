@@ -56,15 +56,13 @@ module-margin-right = 2
 font-0 = Lato:style-Regular:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Siji:style=Regular:pixelsize=10;1
-;font-3 = Fontawesome:style=Regular:pixelsize=8;1
 font-3 = Font Awesome 5 Free Regular:style=Regular:pixelsize=10;1
 font-4 = Font Awesome 5 Brands Regular:style=Regular:pixelsize=10;1
 font-5 = Font Awesome 5 Free Solid:style=Solid:pixelsize=10;1
 
-
 modules-left = i3
 ;modules-center = player-mpris-tail
-modules-right = filesystem xbacklight pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = filesystem pulseaudio xkeyboard memory cpu temperature wlan eth battery date powermenu notification-center
 
 tray-position = right
 tray-padding = 10
@@ -89,8 +87,8 @@ inherit = bar/main_bar
 monitor = ${env:MONITOR:eDP-1}
 
 modules-left = i3
-modules-center = player-mpris-tail
-modules-right =
+modules-center =
+modules-right = player-mpris-tail
 
 tray-position = none
 
@@ -123,7 +121,7 @@ mount-0 = /
 mount-1 = /home
 
 ;format-prefix = " "
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -287,20 +285,20 @@ date-alt = " %A %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
+;format-prefix =
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #0a6cf5
 
-label = %date% %time%
+label =  %date% |  %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
+label-volume =  %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted = 🔇 muted
+label-muted =  muted
 label-muted-foreground = #666
 
 bar-volume-width = 10
@@ -424,6 +422,8 @@ menu-0-1 = 
 menu-0-1-exec = menu-open-2
 menu-0-2 = 
 menu-0-2-exec = menu-open-3
+menu-0-3 = 
+menu-0-3-exec = menu-open-4
 
 menu-1-0 = cancel
 menu-1-0-exec = menu-open-0
@@ -431,7 +431,7 @@ menu-1-1 = Reboot
 menu-1-1-exec = i3exit reboot
 
 menu-2-0 = Power off
-menu-2-0-exec = sudo poweroff
+menu-2-0-exec = i3exit shutdown
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
@@ -439,6 +439,17 @@ menu-3-0 = Suspend
 menu-3-0-exec = i3exit suspend
 menu-3-1 = cancel
 menu-3-1-exec = menu-open-0
+
+menu-4-0 = Logout
+menu-4-0-exec = i3exit logout
+menu-4-1 = cancel
+menu-4-1-exec = menu-open-0
+
+[module/notification-center]
+type = custom/text
+content = 
+
+click-left = kill -s USR1 $(pidof deadd-notification-center)
 
 [settings]
 screenchange-reload = true

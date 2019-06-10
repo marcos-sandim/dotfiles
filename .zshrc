@@ -104,7 +104,7 @@ zstyle ':notify:*' success-title "very #success. wow"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
 PATH="$HOME/repos/rgit/bin:$PATH"
-
 export PATH
+
+eval $(thefuck --alias)
