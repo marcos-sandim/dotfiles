@@ -27,8 +27,9 @@ compinit
 #shopt -s checkwinsize
 
 VISUAL=nvim
+EDITOR=nvim
 
-export VISUAL
+export VISUAL EDITOR
 
 # some more ls aliases
 
@@ -41,7 +42,7 @@ alias xopen='xdg-open'
 recursive_php_lint() {
     #do things with parameters like $1 such as
     # find -L $1 -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n 1 -P 4 php -l
-    docker run --rm -ti --name composer -v $(pwd):/app composer bash -c "find -L /app -name '*.php' -not -path '/app/vendor/*' -print0 | xargs -0 -n 1 -P 4 -I{} php -l {}"
+    docker run --rm -ti --name composer -v $(pwd):/app php:7.1-alpine sh -c "find -L /app -name '*.php' -not -path '/app/vendor/*' -print0 | xargs -0 -n 1 -P 4 -I{} php -l {}"
 }
 
 phan() {
@@ -108,3 +109,5 @@ PATH="$HOME/repos/rgit/bin:$PATH"
 export PATH
 
 eval $(thefuck --alias)
+
+#source ~/.bin/tmuxinator.zsh

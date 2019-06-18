@@ -117,10 +117,10 @@ label-indicator-underline = ${colors.secondary}
 type = internal/fs
 interval = 25
 
-mount-0 = ${env:MOUNT0:/}
-mount-1 = ${env:MOUNT1:}
-mount-2 = ${env:MOUNT2:}
-mount-3 = ${env:MOUNT3:}
+mount-0 = ${env:MOUNT0}
+mount-1 = ${env:MOUNT1}
+mount-2 = ${env:MOUNT2}
+mount-3 = ${env:MOUNT3}
 
 ;format-prefix = " "
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
@@ -170,6 +170,7 @@ label-focused-padding = 10
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 5
+label-unfocused-underline = ${colors.background-alt}
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
@@ -181,6 +182,7 @@ label-visible-padding = ${self.label-focused-padding}
 label-urgent = %index%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 5
+label-urgent-underline = ${colors.background-alt}
 
 ; Separator in between workspaces
 ; label-separator = |

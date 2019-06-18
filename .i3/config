@@ -19,7 +19,7 @@ set $alt Mod1
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:DejaVu Sans Mono 8
+#font pango:DejaVu Sans Mono 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -268,13 +268,12 @@ set $gn     #88b090
 set $rd     #e89393
 
 # set some nice colors      border     background  text
-client.focused              $ac        $ac         $tx
-client.unfocused            $bg        $bg         $ia
-client.focused_inactive     $bg        $bg         $ac
-client.urgent               $rd        $rd         $tx
+client.focused #4F99D3 #4F99D3 #151718 #9FCA56
+client.unfocused #1f2326 #1f2326 #AAAAAA #A074C4
+client.focused_inactive #9FCA56 #9FCA56 #151718 #A074C4
+client.urgent #CE4045 #CE4045 #FFFFFF #DCCD69
 
-font pango:DejaVu Sans Regular 8
-
+font pango:DejaVu Sans Regular 12
 
 for_window [class="Nautilus" instance="nautilus"] floating enable
 for_window [class="Gedit" instance="gedit"] floating enable
