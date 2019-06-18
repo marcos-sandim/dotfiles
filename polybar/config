@@ -62,7 +62,7 @@ font-5 = Font Awesome 5 Free Solid:style=Solid:pixelsize=10;1
 
 modules-left = i3
 ;modules-center = player-mpris-tail
-modules-right = filesystem pulseaudio xkeyboard memory cpu temperature wlan eth battery date powermenu notification-center
+modules-right = filesystem pulseaudio xkeyboard memory cpu temperature wlan eth battery date powermenu notification-center clipster
 
 tray-position = right
 tray-padding = 10
@@ -117,13 +117,14 @@ label-indicator-underline = ${colors.secondary}
 type = internal/fs
 interval = 25
 
-mount-0 = /
-mount-1 = /home
+mount-0 = ${env:MOUNT0:/}
+mount-1 = ${env:MOUNT1:}
+mount-2 = ${env:MOUNT2:}
+mount-3 = ${env:MOUNT3:}
 
 ;format-prefix = " "
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted =
 
 ;[module/bspwm]
 ;type = internal/bspwm
@@ -156,7 +157,7 @@ wrapping-scroll = false
 ; Only show workspaces on the same output as the bar
 pin-workspaces = true
 
-label-mode-padding = 2
+label-mode-padding = 5
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
@@ -179,7 +180,7 @@ label-visible-padding = ${self.label-focused-padding}
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 5
 
 ; Separator in between workspaces
 ; label-separator = |
@@ -238,18 +239,18 @@ label = %gb_used% | %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = ${env:WLAN:wlp0s20f3}
 interval = 5
 
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
 label-connected = %essid%
 
-format-disconnected =
+format-disconnected = <label-disconnected>
 ;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected =  Not connected
+label-disconnected-foreground = ${colors.foreground-alt}
 
 ramp-signal-0 = 
 ;ramp-signal-0 = 
@@ -261,7 +262,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = enp2s0
+interface = ${env:ETH:enp7s0f1}
 interval = 5
 
 format-connected-underline = #55aa55
@@ -269,11 +270,11 @@ format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+;format-disconnected =
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected =  Not connected
+label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
 type = internal/date
@@ -348,8 +349,8 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
-battery = BAT1
-adapter = ACAD
+battery = ${env:BAT:BAT0}
+adapter = ${env:ACADAP:ACAD1}
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
@@ -450,6 +451,12 @@ type = custom/text
 content = 
 
 click-left = kill -s USR1 $(pidof deadd-notification-center)
+
+[module/clipster]
+type = custom/text
+content = 
+
+click-left = clipster -c -o -n 20 -0 | rofi -dmenu -p "Clipboard" -sep '\x00' | perl -pe 'chomp if eof' | clipster
 
 [settings]
 screenchange-reload = true
