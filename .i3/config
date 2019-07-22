@@ -244,6 +244,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id deadd-notification-center
 exec --no-startup-id gnome-keyring-daemon
 # exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id lxpolkit &
 
 exec_always --no-startup-id xinput --set-prop 'DELL0829:00 06CB:7E92 Touchpad' "libinput Natural Scrolling Enabled" 1
 exec_always --no-startup-id xinput --set-prop 'DELL0829:00 06CB:7E92 Touchpad' "libinput Tapping Enabled" 1
@@ -289,3 +290,4 @@ exec --no-startup-id clipster -d
 #bindsym $mod+c exec clipster -sc
 #bindsym $mod+c exec clipster -c -o -n 200 -0 | rofi -dmenu -p "Clipboard" -sep '\x00' | clipster
 bindsym $mod+c exec clipster -c -o -n 200 -0 | rofi -dmenu -p "Clipboard" -sep '\x00' | perl -pe 'chomp if eof' | clipster
+#bindsym $mod+c exec clipster -c -o -n 20 -0 | rofi -dmenu -p "Clipboard" -sep '\x00' | perl -pe 'chomp if eof' | xsel -b

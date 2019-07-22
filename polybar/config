@@ -280,13 +280,15 @@ label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
-date = " %Y-%m-%d"
-date-alt = " %A %Y-%m-%d"
+#date = " %Y-%m-%d"
+#date-alt = " %A %Y-%m-%d"
+date = " %A %Y-%m-%d"
 
-time = %H:%M
-time-alt = %H:%M:%S
+#time = %H:%M
+#time-alt = %H:%M:%S
+time = %H:%M:%S
 
 ;format-prefix =
 format-prefix-foreground = ${colors.foreground-alt}

@@ -29,7 +29,8 @@ compinit
 
 #shopt -s checkwinsize
 
-VISUAL=nvim
+#VISUAL=nvim
+VISUAL='subl --wait'
 EDITOR=nvim
 
 export VISUAL EDITOR
@@ -42,14 +43,18 @@ alias la="ls -lAF"
 
 alias xopen='xdg-open'
 
-recursive_php_lint() {
+php_lint_r() {
     #do things with parameters like $1 such as
     # find -L $1 -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n 1 -P 4 php -l
-    docker run --rm -ti --name composer -v $(pwd):/app php:7.1-alpine sh -c "find -L /app -name '*.php' -not -path '/app/vendor/*' -print0 | xargs -0 -n 1 -P 4 -I{} php -l {}"
+    docker run --rm -ti -v $(pwd):/app php:7.1-alpine sh -c "find -L /app -name '*.php' -not -path '/app/vendor/*' -print0 | xargs -0 -n 1 -P 4 -I{} php -l {} | grep -v 'No syntax errors detected'"
 }
 
 phan() {
     docker run -v $(pwd):/mnt/src --rm -u "$(id -u):$(id -g)" cloudflare/phan:latest $@; return $?;
+}
+
+phpcs() {
+     docker run --rm -v $(pwd):/project herloct/phpcs --ignore='vendor/*' $@; return $?;
 }
 
 #docker run -d -v $(pwd):/src -w /src --name pg_client postgres:9.5-alpine psql
@@ -70,7 +75,6 @@ alias svnst="svn st --ignore-externals"
 alias svnup="svn up --ignore-externals"
 alias svn_colordiff="svn diff | colordiff | less -R"
 alias calc="sh /home/marcos_sandim/bashcalc.sh"
-alias php_lint_r=recursive_php_lint
 
 # unalias rm
 setopt RM_STAR_SILENT
