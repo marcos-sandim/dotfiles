@@ -17,9 +17,10 @@ setopt HIST_IGNORE_ALL_DUPS
 export ZSH="/home/sandim/.oh-my-zsh"
 
 #ZSH_THEME="powerline"
-ZSH_THEME="powerlevel9k/powerlevel9k"
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME=powerlevel10k/powerlevel10k
 
-plugins=(fzf docker thefuck)
+plugins=(fzf docker kubectl thefuck z zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -40,13 +41,16 @@ export VISUAL EDITOR
 #alias la='ls -A'
 alias l='ls -CF'
 alias la="ls -lAF"
-
 alias xopen='xdg-open'
+alias please='sudo'
+alias git-current-branch="git branch | grep \* | cut -d ' ' -f2"
+alias kc='kubectl'
+alias nvipe='vipe > /dev/null'
 
 php_lint_r() {
     #do things with parameters like $1 such as
     # find -L $1 -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n 1 -P 4 php -l
-    docker run --rm -ti -v $(pwd):/app php:7.1-alpine sh -c "find -L /app -name '*.php' -not -path '/app/vendor/*' -print0 | xargs -0 -n 1 -P 4 -I{} php -l {} | grep -v 'No syntax errors detected'"
+    docker run --rm -ti -v $(pwd):/app php:7.1-alpine sh -c "find -L /app -name '*.php' -not -path '/app/vendor/*' -print0 | xargs -0 -n 1 -P 4 -I{} sh -c 'php -l {} || true' | grep -v 'No syntax errors detected'"
 }
 
 phan() {
@@ -54,7 +58,7 @@ phan() {
 }
 
 phpcs() {
-     docker run --rm -v $(pwd):/project herloct/phpcs --ignore='vendor/*' $@; return $?;
+     docker run --rm -v $(pwd):/project herloct/phpcs --ignore='vendor/*' --extensions=php $@; return $?;
 }
 
 #docker run -d -v $(pwd):/src -w /src --name pg_client postgres:9.5-alpine psql
@@ -65,16 +69,16 @@ phpcs() {
 #}
 
 
-alias run_acl='php application/modules/Acl/scripts/assets/acl.php'
-alias run_acl_deploy='php application/modules/Acl/scripts/acl_deploy.php'
-alias set_kbd_m='sudo setxkbmap -model 105-key -layout us -variant intl'
-alias svnc="svn st --ignore-externals | grep '^[[:space:]C\!\~]'"
-alias svnnv='svn st --ignore-externals | grep "^?"'
-alias svnm="svn st --ignore-externals | grep '^[[:space:]ACDIMR\!\~]'"
-alias svnst="svn st --ignore-externals"
-alias svnup="svn up --ignore-externals"
-alias svn_colordiff="svn diff | colordiff | less -R"
-alias calc="sh /home/marcos_sandim/bashcalc.sh"
+#alias run_acl='php application/modules/Acl/scripts/assets/acl.php'
+#alias run_acl_deploy='php application/modules/Acl/scripts/acl_deploy.php'
+#alias set_kbd_m='sudo setxkbmap -model 105-key -layout us -variant intl'
+#alias svnc="svn st --ignore-externals | grep '^[[:space:]C\!\~]'"
+#alias svnnv='svn st --ignore-externals | grep "^?"'
+#alias svnm="svn st --ignore-externals | grep '^[[:space:]ACDIMR\!\~]'"
+#alias svnst="svn st --ignore-externals"
+#alias svnup="svn up --ignore-externals"
+#alias svn_colordiff="svn diff | colordiff | less -R"
+#alias calc="sh /home/marcos_sandim/bashcalc.sh"
 
 # unalias rm
 setopt RM_STAR_SILENT
@@ -84,7 +88,7 @@ setopt RM_STAR_SILENT
 bindkey '\e[3~' delete-char
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
-
+bindkey '^ ' autosuggest-accept
 
 # Report CPU usage for commands running longer than 10 seconds
 TIMEFMT=$'\n\treal\t%E\n\tuser:\t%U\n\tsys:\t%S'
@@ -112,9 +116,15 @@ zstyle ':notify:*' success-title "very #success. wow"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export GOPATH=$HOME/go
+
+PATH=$PATH:$GOPATH/bin
 PATH="$HOME/repos/rgit/bin:$PATH"
 export PATH
 
 eval $(thefuck --alias)
 
 #source ~/.bin/tmuxinator.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh

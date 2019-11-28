@@ -7,23 +7,29 @@ Xcursor.theme: neutral
 !
 !
 !URxvt*font:             xft:Profont:size=8
-URxvt.font:                     xft:DejaVu\ Sans\ Mono\ for\ Powerline:autohint=true:size=10
-URxvt.boldFont:                 xft:DejaVu\ Sans\ Mono\ for\ Powerline:autohint=true:bold:size=10
-URxvt.italicFont:               xft:DejaVu\ Sans\ Mono\ for\ Powerline:autohint=true:italic:size=10
-URxvt.boldItalicFont:           xft:DejaVu\ Sans\ Mono\ for\ Powerline:autohint=true:bold:italic:size=10
+!URxvt.font:                     xft:DejaVu\ Sans\ Mono\ for\ Powerline:autohint=true:size=10
+!URxvt.boldFont:                 xft:DejaVu\ Sans\ Mono\ for\ Powerline:autohint=true:bold:size=10
+!URxvt.italicFont:               xft:DejaVu\ Sans\ Mono\ for\ Powerline:autohint=true:italic:size=10
+!URxvt.boldItalicFont:           xft:DejaVu\ Sans\ Mono\ for\ Powerline:autohint=true:bold:italic:size=10
+
+URxvt.font:                     xft:MesloLGS\ NF:autohint=true:size=11
+URxvt.boldFont:                 xft:MesloLGS\ NF:autohint=true:bold:size=11
+URxvt.italicFont:               xft:MesloLGS\ NF:autohint=true:italic:size=11
+URxvt.boldItalicFont:           xft:MesloLGS\ NF:autohint=true:bold:italic:size=11
 
 URxvt*saveLines:        32767
 URxvt*scrollBar:        false
 URxvt*scrollBar_right:  true
 URxvt*loginShell:       true
 URxvt*shading:          30
-!URxvt*termName:         rxvt-unicode
+!URxvt*termName:        rxvt-unicode
 URxvt*secondaryScroll:  true
-URxvt*perl-lib:         /usr/lib/URxvt/perl/
-URxvt*perl-ext-common:  default,matcher,searchable-scrollback,clipboard,selection-to-clipboard
-URxvt*urlLauncher:      chromium-browser
-URxvt*matcher.button:   1
-!URxvt*cutchars:         `"()'*<>[]{|}
+URxvt*perl-lib:         /usr/lib64/urxvt/perl/
+! URxvt*perl-ext-common:  default,matcher,searchable-scrollback,clipboard,selection-to-clipboard
+URxvt.perl-ext-common:  default,matcher
+URxvt.url-launcher:     /usr/bin/firefox
+URxvt.matcher.button:   1
+!URxvt*cutchars:        `"()'*<>[]{|}
 URxvt*visualBell:       false
 !URxvt*keysym.C-u:       perl:matcher
 URxvt*urgentOnBell:     true
@@ -34,8 +40,8 @@ URxvt*urgentOnBell:     true
 !URxvt*background:       #000000
 !URxvt*foreground:       #e1e2db
 URxvt*cursorBlink:       true
-URxvt.keysym.Shift-Control-V: eval:paste_clipboard
-URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+!URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+!URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
 
 ! Seti_UX
@@ -73,8 +79,8 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 *.cursorColor:  #f6f7ee
 
 ! black
-*.color0:       #15171c
-*.color8:       #15171c
+*.color0:       #222222
+*.color8:       #777777
 
 ! red
 *.color1:       #f82939
