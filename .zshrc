@@ -122,6 +122,7 @@ export GOPATH=$HOME/go
 
 PATH=$PATH:$GOPATH/bin
 PATH="$HOME/repos/rgit/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
 export PATH
 
 eval $(thefuck --alias)

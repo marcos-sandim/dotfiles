@@ -248,9 +248,11 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec_always --no-startup-id xrandr --output LVDS1 --mode 1024x768 --pos 0x312 --output VGA1 --mode 1920x1080 --pos 1024x0
 #exec_always --no-startup-id xrandr --output LVDS1 --auto --output VGA1 --off
 exec_always --no-startup-id xsetroot -solid "#333333"
+exec_always --no-startup-id xrandr --output eDP-1-1 --auto
 
 exec --no-startup-id nm-applet
 #exec --no-startup-id deadd-notification-center
+exec --no-startup-id dunst
 exec --no-startup-id gnome-keyring-daemon
 # exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id lxpolkit &
@@ -259,6 +261,8 @@ exec xautolock -time 15 -locker 'i3lock -i /tmp/wallpaper.png -c 222222' &
 
 exec_always --no-startup-id xinput --set-prop 'DELL0829:00 06CB:7E92 Touchpad' "libinput Natural Scrolling Enabled" 1
 exec_always --no-startup-id xinput --set-prop 'DELL0829:00 06CB:7E92 Touchpad' "libinput Tapping Enabled" 1
+exec_always --no-startup-id xinput --set-prop 'ELAN0504:01 04F3:3091 Touchpad' "libinput Natural Scrolling Enabled" 1
+exec_always --no-startup-id xinput --set-prop 'ELAN0504:01 04F3:3091 Touchpad' "libinput Tapping Enabled" 1
 exec_always --no-startup-id xinput --set-prop "MX Master Mouse" "libinput Natural Scrolling Enabled" 1
 exec_always --no-startup-id xinput --set-prop "pointer:Logitech MX Master" "libinput Natural Scrolling Enabled" 1
 

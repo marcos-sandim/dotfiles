@@ -11,10 +11,10 @@
 !URxvt.italicFont:               xft:DejaVu\ Sans\ Mono\ for\ Powerline:autohint=true:italic:size=10
 !URxvt.boldItalicFont:           xft:DejaVu\ Sans\ Mono\ for\ Powerline:autohint=true:bold:italic:size=10
 
-URxvt.font:                     xft:MesloLGS\ NF:autohint=true:size=11
-URxvt.boldFont:                 xft:MesloLGS\ NF:autohint=true:bold:size=11
-URxvt.italicFont:               xft:MesloLGS\ NF:autohint=true:italic:size=11
-URxvt.boldItalicFont:           xft:MesloLGS\ NF:autohint=true:bold:italic:size=11
+URxvt.font:                     xft:mononoki\ Nerd\ Font\ Mono:autohint=true:size=12
+URxvt.boldFont:                 xft:mononoki\ Nerd\ Font\ Mono:autohint=true:bold:size=12
+URxvt.italicFont:               xft:mononoki\ Nerd\ Font\ Mono:autohint=true:italic:size=12
+URxvt.boldItalicFont:           xft:mononoki\ Nerd\ Font\ Mono:autohint=true:bold:italic:size=12
 
 URxvt*saveLines:        32767
 URxvt*scrollBar:        false

@@ -12,8 +12,8 @@ xsetroot -mod 100 100 -bg "#333333" -fg "#222222" &
 #urxvt256c-ml &
 
 #bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 10
-bspc monitor HDMI-1 -d 1 2 3 4 5
-bspc monitor eDP-1 -d 6 7 8 9 10
+bspc monitor HDMI-0 -d 1 2 3 4 5
+bspc monitor eDP-1-1 -d 6 7 8 9 10
 #for monitor in $(bspc query -M); do
 #    bspc monitor $monitor -d 1 2 3 4
 #done
