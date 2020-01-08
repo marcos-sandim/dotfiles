@@ -1,0 +1,71 @@
+#!/usr/bin/sh
+
+wmname LG3D
+
+killall sxhkd; sxhkd &
+
+$HOME/.config/polybar/launch.sh &
+
+#xsetroot -solid "#333333" &
+xsetroot -mod 100 100 -bg "#333333" -fg "#222222" &
+
+#urxvt256c-ml &
+
+#bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 10
+bspc monitor HDMI-1 -d 1 2 3 4 5
+bspc monitor eDP-1 -d 6 7 8 9 10
+#for monitor in $(bspc query -M); do
+#    bspc monitor $monitor -d 1 2 3 4
+#done
+
+bspc config honor_size_hints false
+
+bspc config ignore_ewmh_focus true
+bspc config ignore_ewmh_fullscreen true
+
+bspc config border_width         2
+bspc config window_gap          12
+bspc config bottom_padding      30
+
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config automatic_scheme     alternate
+bspc config single_monocle     false
+
+#bspc rule -a Gimp desktop='^8' state=floating follow=on
+#bspc rule -a Chromium desktop='^2'
+#bspc rule -a mplayer2 state=floating
+#bspc rule -a Kupfer.py focus=on
+#bspc rule -a Screenkey manage=off
+
+bspc rule -a Firefox desktop='2'
+bspc rule -a Rambox desktop='9'
+bspc rule -a Sublime_text desktop='1'
+bspc rule -a jetbrains-idea-ce desktop='1'
+
+bspc rule -a copyq state=floating
+
+bspc rule -a Nautilus state=floating
+bspc rule -a Gedit state=floating
+bspc rule -a keepassxc state=floating
+bspc rule -a Gcr-viewer state=floating
+bspc rule -a Gnome-calculator state=floating
+bspc rule -a copyq state=floating
+
+xinput --set-prop 'DELL0829:00 06CB:7E92 Touchpad' "libinput Natural Scrolling Enabled" 1
+xinput --set-prop 'DELL0829:00 06CB:7E92 Touchpad' "libinput Tapping Enabled" 1
+xinput --set-prop "MX Master Mouse" "libinput Natural Scrolling Enabled" 1
+xinput --set-prop "pointer:Logitech MX Master" "libinput Natural Scrolling Enabled" 1
+
+killall bspc
+#sh -c 'bspc subscribe | while read; do bash /home/sandim/.config/bspwm/titlebars.sh ; done' &
+
+killall copyq; copyq &
+
+nm-applet &
+lxpolkit &
+dropbox start &
+#rambox &
+xautolock -time 15 -locker 'i3lock -i /tmp/wallpaper.png -c 222222' &

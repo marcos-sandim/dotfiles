@@ -1,0 +1,185 @@
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + Return
+	urxvt256c-ml
+
+# program launcher
+super + d
+	rofi -show drun -show-icons
+
+super + shift + d
+	rofi -show run -show-icons
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# make bspwm reload its configuration files:
+super + shift + r
+	~/.config/bspwm/bspwmrc
+
+XF86AudioRaiseVolume
+	amixer -q set Master 5%+ unmute
+XF86AudioLowerVolume
+	amixer -q set Master 5%- unmute
+XF86AudioMute
+	amixer -q set Master toggle
+XF86AudioPlay
+	playerctl --all-players play-pause
+XF86AudioNext
+	playerctl --all-players next
+XF86AudioPrev
+	playerctl --all-players previous
+
+#
+# bspwm hotkeys
+#
+
+# quit bspwm normally
+super + alt + Escape
+	bspc quit
+
+# lock screen
+super + alt + l
+	i3lock -i /tmp/wallpaper.png -c 222222
+
+# close and killl
+#super + {_,shift + }w
+#	bspc node -{c,k}
+super + shift + q
+	xkill
+
+# close
+super + q
+	xwininfo | sed -nr 's/(xwininfo: Window id: )(0[xX][0-9a-fA-F]+).*/\2/p' | xargs wmctrl -ic
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
+super + y
+	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {x,y,z}
+	bspc node -g {locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus/swap the node in the given direction
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+#super + {p,b,comma,period}
+#	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node
+#super + {_,shift + }c
+#	bspc node -f {next,prev}
+
+# focus the next/previous node in the same window
+#super + bracket{left,right}
+super + {comma,period}
+	bspc node {next,prev}.local -f
+
+super + c
+	~/.local/bin/rofi-copyq
+
+# Print screen
+# Without the sleep scrot crashes with:
+# giblib error: couldn't grab keyboard:Resource temporarily unavailable
+Print
+    scrot $HOME/'Desktop/screengrabs/%Y-%m-%d_%H%M%S-$wx$h_scrot.png'
+
+control + Print
+    sleep 0.2; \
+    scrot -s $HOME/'Desktop/screengrabs/%Y-%m-%d_%H%M%S-$wx$h_scrot.png'
+
+# focus the next/previous desktop
+#super + bracket{left,right}
+super + ctrl + {Left,Down,Up,Right}
+	D=$(bspc query -D -d); \
+	M=$(bspc query -M -m {west,south,north,east}); \
+	bspc desktop -m $M; \
+	bspc query -m $M -T | jq -r '.desktops[].name' | sort -n | xargs bspc monitor $M -o; \
+	bspc desktop -f $D
+
+# focus the last node/desktop
+super + Tab
+	bspc desktop -f last
+
+alt + Tab
+	rofi -show window -show-icons -sort -kb-cancel 'Alt+Escape,Escape' -kb-accept-entry '!Alt-Tab,!Alt_L,!Alt+Alt_L,Return' -kb-row-down 'Alt+Tab,Alt+Down' -kb-row-up 'Alt+ISO_Left_Tab,Alt+Shift+Tab,Alt+Up'
+#bspc node -f last
+
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus the given desktop
+super + {1-9,0}
+	bspc desktop -f '{1-9,10}'
+
+# send to the given desktop and focus it
+super + shift + {1-9,0}
+	D='{1-9,10}'; \
+	bspc node -d $D; \
+	bspc desktop -f $D
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+super + alt + {Left,Down,Up,Right}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {Left,Down,Up,Right}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + {h,j,k,l}
+	bspc node -v {-20 0,0 20,0 -20,20 0}

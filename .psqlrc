@@ -4,7 +4,7 @@
 \pset linestyle unicode
 \pset border 2
 -- Mostra o tempo de cada query executada
---\timing
+\timing
 -- Mostra todo tipo de erro e saida, ajuda no debug
 --\set VERBOSITY verbose
 \set QUIET off

@@ -250,7 +250,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xsetroot -solid "#333333"
 
 exec --no-startup-id nm-applet
-exec --no-startup-id deadd-notification-center
+#exec --no-startup-id deadd-notification-center
 exec --no-startup-id gnome-keyring-daemon
 # exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id lxpolkit &
@@ -304,3 +304,9 @@ exec --no-startup-id copyq
 #bindsym $mod+c exec clipster -c -o -n 200 -0 | rofi -dmenu -p "Clipboard" -sep '\x00' | perl -pe 'chomp if eof' | clipster
 #bindsym $mod+c exec clipster -c -o -n 20 -0 | rofi -dmenu -p "Clipboard" -sep '\x00' | perl -pe 'chomp if eof' | xsel -b
 bindsym $mod+c exec ~/.local/bin/rofi-copyq
+
+
+assign [class="Firefox"] 2
+assign [class="Rambox"] 9
+assign [class="Sublime_text"] 1
+assign [class="jetbrains-idea-ce"] 1

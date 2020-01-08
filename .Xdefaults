@@ -1,4 +1,3 @@
-Xcursor.theme: neutral
 
 !-------------------------------------------------------------------------------
 !
@@ -217,3 +216,5 @@ xterm*color15:     #ffffff
 !xfontsel.pane.fieldBox.MenuButton.internalHeight:1
 !xfontsel.pane.fieldBox.MenuButton.internalWidth: 2
 !xfontsel.pane.fieldBox.MenuButton.shapeStyle:    rectangle
+
+Xcursor.theme: breeze_cursors

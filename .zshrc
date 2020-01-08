@@ -20,7 +20,7 @@ export ZSH="/home/sandim/.oh-my-zsh"
 #ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_THEME=powerlevel10k/powerlevel10k
 
-plugins=(fzf docker kubectl thefuck z zsh-autosuggestions)
+plugins=(fzf docker kubectl z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -39,13 +39,15 @@ export VISUAL EDITOR
 # some more ls aliases
 
 #alias la='ls -A'
+alias ls='exa'
 alias l='ls -CF'
-alias la="ls -lAF"
+alias la="ls -la"
 alias xopen='xdg-open'
 alias please='sudo'
 alias git-current-branch="git branch | grep \* | cut -d ' ' -f2"
 alias kc='kubectl'
 alias nvipe='vipe > /dev/null'
+alias cd='cd -P'
 
 php_lint_r() {
     #do things with parameters like $1 such as
@@ -128,3 +130,7 @@ eval $(thefuck --alias)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/sandim/.sdkman"
+[[ -s "/home/sandim/.sdkman/bin/sdkman-init.sh" ]] && source "/home/sandim/.sdkman/bin/sdkman-init.sh"

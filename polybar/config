@@ -31,10 +31,10 @@ alert = #bd2c40
 monitor = ${env:MONITOR:HDMI-1}
 ;monitor-fallback = eDP-1
 width = 100%
-height = 27
+height = 28
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 0.0
 fixed-center = false
 bottom = true
 
@@ -44,7 +44,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 1
 border-color = #00000000
 
 padding-left = 0
@@ -60,18 +60,19 @@ font-3 = Font Awesome 5 Free Regular:style=Regular:pixelsize=10;1
 font-4 = Font Awesome 5 Brands Regular:style=Regular:pixelsize=10;1
 font-5 = Font Awesome 5 Free Solid:style=Solid:pixelsize=10;1
 
-modules-left = i3
+modules-left = bspwm
 ;modules-center = player-mpris-tail
-modules-right = filesystem pulseaudio xkeyboard memory cpu temperature wlan eth battery date powermenu notification-center
+modules-right = filesystem pulseaudio xkeyboard memory cpu temperature wlan eth battery date powermenu
+;notification-center
 
 tray-position = right
 tray-padding = 10
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
+wm-restack = bspwm
 ;wm-restack = i3
 
-;override-redirect = true
+override-redirect = true
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
@@ -86,12 +87,16 @@ cursor-scroll = ns-resize
 inherit = bar/main_bar
 monitor = ${env:MONITOR:eDP-1}
 
-modules-left = i3
+modules-left = bspwm
 modules-center =
 modules-right = player-mpris-tail
 
 tray-position = none
 
+wm-restack = bspwm
+;wm-restack = i3
+
+override-redirect = true
 
 [module/xwindow]
 type = internal/xwindow
