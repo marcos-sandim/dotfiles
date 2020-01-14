@@ -162,6 +162,18 @@ reverse-scroll = false
 ; Default: false
 fuzzy-match = true
 
+; Available tags:
+;   <label-monitor>
+;   <label-state> - gets replaced with <label-(focused|urgent|occupied|empty)>
+;   <label-mode> - gets replaced with <label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
+; Default: <label-state>
+format = <label-state> <label-mode>
+
+; Available tokens:
+;   %name%
+; Default: %name%
+label-monitor = %name%
+
 label-mode-padding = 5
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}

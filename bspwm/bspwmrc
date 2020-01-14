@@ -78,6 +78,7 @@ xinput --set-prop 'DELL0829:00 06CB:7E92 Touchpad' "libinput Natural Scrolling E
 xinput --set-prop 'DELL0829:00 06CB:7E92 Touchpad' "libinput Tapping Enabled" 1
 xinput --set-prop "MX Master Mouse" "libinput Natural Scrolling Enabled" 1
 xinput --set-prop "pointer:Logitech MX Master" "libinput Natural Scrolling Enabled" 1
+xinput --set-prop "pointer:Logitech MX Master 3" "libinput Natural Scrolling Enabled" 1
 
 killall bspc
 #sh -c 'bspc subscribe | while read; do bash /home/sandim/.config/bspwm/titlebars.sh ; done' &
@@ -87,5 +88,5 @@ killall copyq; copyq &
 nm-applet &
 lxpolkit &
 dropbox start &
-#rambox &
+rambox &
 xautolock -time 15 -locker 'i3lock -i /tmp/wallpaper.png -c 222222' &

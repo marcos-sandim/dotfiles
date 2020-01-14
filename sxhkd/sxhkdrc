@@ -184,6 +184,9 @@ super + alt + shift + {Left,Down,Up,Right}
 super + {h,j,k,l}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
+#super + r
+#	bspc node @/ -R 90
+
 super + r
 	bspc node -R 90
 
