@@ -1,5 +1,20 @@
 #!/usr/bin/sh
 
+#set -xe
+
+xrandr --output eDP-1-1 --auto
+
+displays=($(xrandr | awk '/\ connected/ && /[[:digit:]]x[[:digit:]].*+/{printf ("%s\n",$1) }' | sort))
+
+if [[ ${#displays[@]} = 2 ]]; then
+    xrandr --output ${displays[1]} --right-of ${displays[0]}
+    bspc monitor ${displays[1]} -d 1 2 3 4 5
+    bspc monitor ${displays[0]} -d 6 7 8 9 10
+else
+    xrandr --output ${displays[0]} --auto
+    bspc monitor ${displays[0]} -d 1 2 3 4 5 6 7 8 9 10
+fi
+
 wmname LG3D
 
 killall sxhkd; sxhkd &
@@ -7,16 +22,24 @@ killall sxhkd; sxhkd &
 $HOME/.config/polybar/launch.sh &
 
 #xsetroot -solid "#333333" &
-xsetroot -mod 100 100 -bg "#333333" -fg "#222222" &
+xsetroot -mod 100 100 -bg "#333333" -fg "#222222"
+xsetroot -cursor_name left_ptr
 
 #urxvt256c-ml &
 
 #bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 10
-bspc monitor HDMI-0 -d 1 2 3 4 5
-bspc monitor eDP-1-1 -d 6 7 8 9 10
+#bspc monitor HDMI-0 -d 1 2 3 4 5
+#bspc monitor eDP-1-1 -d 6 7 8 9 10
 #for monitor in $(bspc query -M); do
 #    bspc monitor $monitor -d 1 2 3 4
 #done
+
+
+# Border colors
+bspc config normal_border_color "#484848"
+bspc config focused_border_color "#AA7777"
+bspc config urgent_border_color "#B58900"
+bspc config presel_border_color "#26E2FF"
 
 bspc config honor_size_hints false
 
@@ -26,7 +49,6 @@ bspc config ignore_ewmh_fullscreen true
 bspc config border_width         2
 bspc config window_gap          12
 bspc config bottom_padding      30
-
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
@@ -44,8 +66,6 @@ bspc rule -a Firefox desktop='2'
 bspc rule -a Rambox desktop='9'
 bspc rule -a Sublime_text desktop='1'
 bspc rule -a jetbrains-idea-ce desktop='1'
-
-bspc rule -a copyq state=floating
 
 bspc rule -a Nautilus state=floating
 bspc rule -a Gedit state=floating
