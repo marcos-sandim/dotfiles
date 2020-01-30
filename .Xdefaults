@@ -42,6 +42,8 @@ URxvt*cursorBlink:       true
 !URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 !URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
+xterm*dynamicColors: true
+urxvt*dynamicColors: on
 
 ! Seti_UX
 ! Ansi0Color:  #15171C

@@ -37,9 +37,10 @@ xsetroot -cursor_name left_ptr
 
 # Border colors
 bspc config normal_border_color "#484848"
+bspc config active_border_color "#7777AA"
 bspc config focused_border_color "#AA7777"
 bspc config urgent_border_color "#B58900"
-bspc config presel_border_color "#26E2FF"
+bspc config presel_feedback_color "#26E2FF"
 
 bspc config honor_size_hints false
 
@@ -66,6 +67,9 @@ bspc rule -a Firefox desktop='2'
 bspc rule -a Rambox desktop='9'
 bspc rule -a Sublime_text desktop='1'
 bspc rule -a jetbrains-idea-ce desktop='1'
+bspc rule -a jetbrains-phpstorm desktop='1'
+bspc rule -a jetbrains-goland desktop='1'
+bspc rule -a Postman desktop='4'
 
 bspc rule -a Nautilus state=floating
 bspc rule -a Gedit state=floating
@@ -83,10 +87,11 @@ xinput --set-prop "pointer:Logitech MX Master 3" "libinput Natural Scrolling Ena
 killall bspc
 #sh -c 'bspc subscribe | while read; do bash /home/sandim/.config/bspwm/titlebars.sh ; done' &
 
-killall copyq; copyq &
+#killall copyq; copyq &
 
 nm-applet &
 lxpolkit &
 dropbox start &
 rambox &
 xautolock -time 15 -locker 'i3lock -i /tmp/wallpaper.png -c 222222' &
+killall clipster; clipster -d

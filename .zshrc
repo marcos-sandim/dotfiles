@@ -135,3 +135,7 @@ eval $(thefuck --alias)
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/sandim/.sdkman"
 [[ -s "/home/sandim/.sdkman/bin/sdkman-init.sh" ]] && source "/home/sandim/.sdkman/bin/sdkman-init.sh"
+
+export PATH="$HOME/.dynamic-colors/bin:$PATH"
+source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
+

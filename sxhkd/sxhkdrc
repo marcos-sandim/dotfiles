@@ -101,8 +101,12 @@ super + {_,shift + }{Left,Down,Up,Right}
 super + {comma,period}
 	bspc node {next,prev}.local -f
 
+#super + c
+#	~/.local/bin/rofi-copyq
+
 super + c
-	~/.local/bin/rofi-copyq
+	~/.local/bin/roficlip
+
 
 # Print screen
 # Without the sleep scrot crashes with:
