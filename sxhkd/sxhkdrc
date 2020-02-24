@@ -15,6 +15,9 @@ super + d
 super + shift + d
     rofi -show run -show-icons
 
+super + shift + c
+	rofi -modi calc -show calc -no-show-match -no-sort -terse
+
 # make sxhkd reload its configuration files:
 super + Escape
     pkill -USR1 -x sxhkd
@@ -149,8 +152,8 @@ super + {o,i}
     bspc wm -h on
 
 # focus the given desktop
-super + {1-9,0}
-    bspc desktop -f '{1-9,10}'
+super + {1-9,0,dead_grave}
+	bspc desktop -f '{1-9,10,10}'
 
 # send to the given desktop and focus it
 super + shift + {1-9,0}
