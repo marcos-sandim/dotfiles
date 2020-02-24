@@ -20,7 +20,7 @@ export ZSH="/home/sandim/.oh-my-zsh"
 #ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_THEME=powerlevel10k/powerlevel10k
 
-plugins=(fzf docker kubectl z)
+plugins=(docker kubectl z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -139,3 +139,9 @@ export SDKMAN_DIR="/home/sandim/.sdkman"
 export PATH="$HOME/.dynamic-colors/bin:$PATH"
 source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/mnt/storage/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/mnt/storage/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/mnt/storage/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/mnt/storage/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

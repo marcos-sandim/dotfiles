@@ -28,7 +28,6 @@ URxvt*perl-lib:         /usr/lib64/urxvt/perl/
 URxvt.perl-ext-common:  default,matcher
 URxvt.url-launcher:     /usr/bin/firefox
 URxvt.matcher.button:   1
-!URxvt*cutchars:        `"()'*<>[]{|}
 URxvt*visualBell:       false
 !URxvt*keysym.C-u:       perl:matcher
 URxvt*urgentOnBell:     true
@@ -139,7 +138,7 @@ xterm*cursorBlink:       true
 xterm*saveLines:         65535
 xterm*dynamicColors:        on
 xterm*highlightSelection: true
-! Catch URL's?
+! Catch URLs?
 xterm*charClass:     33:48,35-38:48,39:43,42-47:48,58-59:48,61:48,63-64:48,126:48
 ! Appearance
 xterm*utf8:          2
@@ -219,4 +218,5 @@ xterm*color15:     #ffffff
 !xfontsel.pane.fieldBox.MenuButton.internalWidth: 2
 !xfontsel.pane.fieldBox.MenuButton.shapeStyle:    rectangle
 
-Xcursor.theme: breeze_cursors
+Xcursor.theme: Breeze_Default
+

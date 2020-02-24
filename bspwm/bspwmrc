@@ -63,10 +63,11 @@ bspc config single_monocle     false
 #bspc rule -a Kupfer.py focus=on
 #bspc rule -a Screenkey manage=off
 
-bspc rule -a Firefox desktop='2'
+bspc rule -a firefox desktop='2'
 bspc rule -a Rambox desktop='9'
 bspc rule -a Sublime_text desktop='1'
 bspc rule -a jetbrains-idea-ce desktop='1'
+bspc rule -a jetbrains-idea desktop='1'
 bspc rule -a jetbrains-phpstorm desktop='1'
 bspc rule -a jetbrains-goland desktop='1'
 bspc rule -a Postman desktop='4'

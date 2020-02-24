@@ -61,8 +61,8 @@ font-4 = Font Awesome 5 Brands Regular:style=Regular:pixelsize=10;1
 font-5 = Font Awesome 5 Free Solid:style=Solid:pixelsize=10;1
 
 modules-left = bspwm
-;modules-center = player-mpris-tail
-modules-right = filesystem pulseaudio xkeyboard memory cpu temperature wlan eth battery date powermenu
+modules-center = title
+modules-right = pulseaudio xkeyboard memory cpu temperature wlan eth battery date powermenu
 ;notification-center
 
 tray-position = right
@@ -88,8 +88,8 @@ inherit = bar/main_bar
 monitor = ${env:MONITOR:eDP-1}
 
 modules-left = bspwm
-modules-center =
-modules-right = player-mpris-tail
+modules-center = player-mpris-tail
+modules-right = filesystem
 
 tray-position = none
 
@@ -98,9 +98,9 @@ wm-restack = bspwm
 
 override-redirect = true
 
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:30:...%
+;[module/xwindow]
+;type = internal/xwindow
+;label = %title:0:30:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -299,7 +299,7 @@ format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
 label-connected = %essid%
 
-format-disconnected = <label-disconnected>
+format-disconnected =
 ;format-disconnected = <label-disconnected>
 format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected =  Not connected
@@ -323,8 +323,8 @@ format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
-;format-disconnected =
-format-disconnected = <label-disconnected>
+format-disconnected =
+;format-disconnected = <label-disconnected>
 format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected =  Not connected
 label-disconnected-foreground = ${colors.foreground-alt}
@@ -357,7 +357,7 @@ label-volume-foreground = ${root.foreground}
 label-muted =  muted
 label-muted-foreground = #666
 
-bar-volume-width = 10
+bar-volume-width = 5
 bar-volume-foreground-0 = #55aa55
 bar-volume-foreground-1 = #55aa55
 bar-volume-foreground-2 = #55aa55
@@ -529,7 +529,7 @@ margin-bottom = 5
 type = internal/xwindow
 ; Available tags:
 ;   <label> (default)
-format = <label>
+format =  <label>
 ;format-background = #f0
 ;format-foreground = #000
 format-padding = 4
@@ -550,7 +550,7 @@ label-empty = Empty
 
 [module/player-mpris-tail]
 type = custom/script
-exec = ~/repos/polybar-scripts/polybar-scripts/player-mpris-tail/player-mpris-tail.py  -f '{icon} {artist} - {title}'
+exec = ~/repos/polybar-scripts/polybar-scripts/player-mpris-tail/player-mpris-tail.py  -f '{icon} {artist} - {title}' --icon-playing  --icon-paused  --icon-stopped 
 tail = true
 label = %output%
 click-left = ~/repos/polybar-scripts/polybar-scripts/player-mpris-tail/player-mpris-tail.py play-pause
