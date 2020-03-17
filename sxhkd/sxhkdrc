@@ -13,7 +13,7 @@ super + d
     rofi -show drun -show-icons
 
 super + shift + d
-    rofi -show run -show-icons
+    rofi -show run -show-icons -run-command 'alacritty --title \{cmd\} -e \{cmd\}'
 
 super + shift + c
 	rofi -modi calc -show calc -no-show-match -no-sort -terse
@@ -152,7 +152,7 @@ super + {o,i}
     bspc wm -h on
 
 # focus the given desktop
-super + {1-9,0,dead_grave}
+super + {1-9,0}
 	bspc desktop -f '{1-9,10,10}'
 
 # send to the given desktop and focus it
@@ -215,4 +215,4 @@ super + ctrl + {m,x,y,z}
     bspc node -g {marked,locked,sticky,private}
 
 super + space
-    ~/repos/dotfiles/scripts/open_scratch.sh
+    VISUAL=subl ~/repos/dotfiles/scripts/open_scratch.sh

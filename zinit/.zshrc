@@ -18,11 +18,14 @@ KEYTIMEOUT=1
 
 # History settings
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 setopt EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY_TIME
+#alias history="fc -R && fc -l 1"
+#cat ~/.histfile | fzf | xargs -I{} sh -c "cat ~/.histfile | grep -v {} > ~/.histfile"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -44,15 +47,17 @@ zinit light romkatv/powerlevel10k
 # To customize prompt, run `\` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Kubectl
-source <(kubectl completion zsh)
-alias k=kubectl
-#complete -F __start_kubectl k
+# # Kubectl
+# source <(kubectl completion zsh)
+# alias k=kubectl
+# #complete -F __start_kubectl k
 
 # FZF
 #zinit ice wait'!0'
 zinit snippet OMZ::plugins/fzf/fzf.plugin.zsh
 
+export FZF_ALT_C_COMMAND="fd --type directory --follow --hidden --exclude .git"
+export FZF_CTRL_T_COMMAND="fd --type file --follow --hidden --exclude .git"
 
 # Editor
 VISUAL='subl --wait'
@@ -74,6 +79,8 @@ alias mux='tmuxinator'
 
 alias pacinstall="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias yayinstall="yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S"
+
+alias dnfinstall="dnf list --all | awk '{print \$1}' | fzf -m --preview 'dnf repoquery -i {1}' | xargs -r sudo dnf install -y"
 
 # Functions
 docker_logs_jq() {
@@ -102,3 +109,16 @@ if [ -f '/mnt/storage/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/mnt/s
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/mnt/storage/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/mnt/storage/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+export XDG_CONFIG_HOME=$HOME/.config
+
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+# zle -N edit-command-line
+# bindkey '^xe' edit-command-line
+# bindkey '^x^e' edit-command-line
+# Vi style:
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+

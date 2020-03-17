@@ -12,12 +12,12 @@ echo $bspc_monitors
 
 if [[ ${#displays[@]} = 2 ]]; then
 	echo "Two monitors"
-    xrandr --output ${displays[1]} --right-of ${displays[0]}
+    #xrandr --output ${displays[1]} --left-of ${displays[0]}
     bspc monitor ${displays[1]} -d 1 2 3 4 5
     bspc monitor ${displays[0]} -d 6 7 8 9 10
 else
 	echo "One monitor"
-    xrandr --output ${displays[0]} --auto
+    #xrandr --output ${displays[0]} --auto
     bspc monitor ${displays[0]} -d 1 2 3 4 5 6 7 8 9 10
 fi
 
@@ -29,7 +29,7 @@ $HOME/.config/polybar/launch.sh &
 
 #xsetroot -solid "#333333" &
 xsetroot -mod 100 100 -bg "#333333" -fg "#222222"
-xsetroot -cursor_name left_ptr
+xsetroot -cursor_name spider
 
 #urxvt256c-ml &
 
@@ -70,8 +70,10 @@ bspc config single_monocle     false
 #bspc rule -a Screenkey manage=off
 
 bspc rule -a Firefox desktop='2'
+bspc rule -a firefox desktop='2'
 bspc rule -a Rambox desktop='9'
 bspc rule -a Sublime_text desktop='1'
+bspc rule -a Code desktop='1'
 bspc rule -a jetbrains-idea-ce desktop='1'
 bspc rule -a jetbrains-idea desktop='1'
 bspc rule -a jetbrains-phpstorm desktop='1'
@@ -81,12 +83,11 @@ bspc rule -a jetbrains-pycharm desktop='1'
 bspc rule -a 'MATLAB R2015a' desktop='3'
 
 bspc rule -a Nautilus state=floating
-bspc rule -a Gedit state=floating
 bspc rule -a KeePassXC state=floating
 bspc rule -a keepassxc state=floating
 bspc rule -a Gcr-viewer state=floating
-bspc rule -a Gnome-calculator state=floating
 #bspc rule -a copyq state=floating
+bspc rule -a Zathura state=tiled
 
 xinput --set-prop 'ELAN0504:01 04F3:3091 Touchpad' "libinput Natural Scrolling Enabled" 1
 xinput --set-prop 'ELAN0504:01 04F3:3091 Touchpad' "libinput Tapping Enabled" 1
@@ -101,7 +102,7 @@ killall bspc
 
 nm-applet &
 lxpolkit &
-dropbox start &
+maestral start &
 rambox &
 xautolock -time 15 -locker 'i3lock -i /tmp/wallpaper.png -c 222222' &
 killall clipster; clipster -d
