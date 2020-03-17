@@ -153,7 +153,7 @@ super + {o,i}
 
 # focus the given desktop
 super + {1-9,0}
-	bspc desktop -f '{1-9,10,10}'
+    bspc desktop -f '{1-9,10}'
 
 # send to the given desktop and focus it
 super + shift + {1-9,0}
@@ -215,4 +215,4 @@ super + ctrl + {m,x,y,z}
     bspc node -g {marked,locked,sticky,private}
 
 super + space
-    VISUAL=subl ~/repos/dotfiles/scripts/open_scratch.sh
+    ~/repos/dotfiles/scripts/open_scratch.sh

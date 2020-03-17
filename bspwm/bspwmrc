@@ -2,7 +2,7 @@
 
 #set -xe
 
-#xrandr --output eDP-1-1 --auto
+# xrandr --output eDP-1-1 --auto
 
 displays=($(xrandr | grep -i -e '\bconnected\b' | awk '{printf ("%s\n",$1) }' | sort))
 bspc_monitors=$(bspc query -M)
@@ -12,12 +12,12 @@ echo $bspc_monitors
 
 if [[ ${#displays[@]} = 2 ]]; then
 	echo "Two monitors"
-    #xrandr --output ${displays[1]} --left-of ${displays[0]}
+    # xrandr --output ${displays[1]} --left-of ${displays[0]}
     bspc monitor ${displays[1]} -d 1 2 3 4 5
     bspc monitor ${displays[0]} -d 6 7 8 9 10
 else
 	echo "One monitor"
-    #xrandr --output ${displays[0]} --auto
+    # xrandr --output ${displays[0]} --auto
     bspc monitor ${displays[0]} -d 1 2 3 4 5 6 7 8 9 10
 fi
 
@@ -102,7 +102,8 @@ killall bspc
 
 nm-applet &
 lxpolkit &
-maestral start &
+#dropbox start &
+maestral start &/
 rambox &
 xautolock -time 15 -locker 'i3lock -i /tmp/wallpaper.png -c 222222' &
 killall clipster; clipster -d
