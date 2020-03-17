@@ -6,27 +6,29 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug '/usr/local/opt/fzf'
 
-Plug '/home/sandim/.local/share/nvim/plugged-manual/cecutil'
-Plug '/home/sandim/.local/share/nvim/plugged-manual/vis'
+Plug '~/.local/share/nvim/plugged-manual/vis'
 
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
+" Plug 'junegunn/vim-easy-align'
+" Plug 'tpope/vim-abolish'
+" Plug 'tpope/vim-eunuch'
+" Plug 'tpope/vim-vinegar'
+Plug 'ap/vim-buftabline'
+Plug 'chriskempson/base16-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'lervag/vimtex'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'mhinz/vim-startify'
+Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
-" Plug 'tpope/vim-abolish'
+Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
-" Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
-Plug 'preservim/nerdtree'
-Plug 'svermeulen/vim-easyclip'
 
 call plug#end()
 
@@ -83,6 +85,8 @@ set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:%
 " set listchars+=eol:¬,space:·
 set listchars+=space:·
 
+set guifont=Fira\ Code:h14
+
 " }}}
 
 " Split Settings {{{
@@ -100,7 +104,7 @@ set tabstop=2 " number of visual spaces per TAB
 set softtabstop=2 " number of spaces in tab when editing
 set foldenable      " enable folding
 set foldmethod=indent " fold based on indent level
-set foldlevelstart=5   " open 10 folds by default
+set foldlevelstart=5   " open 5 folds by default
 set foldnestmax=10      " limits folds to 10
 
 " }}}
@@ -113,16 +117,13 @@ set hlsearch    " highlight found searches
 set ignorecase  " search case insensitive...
 set smartcase   " ... but not when search pattern contains upper case characters
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --no-ignore --hidden --smart-case '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
 
 " }}}
 
 " Color Settings {{{
 
-"colorscheme base16
+colorscheme base16-default-dark
 set nocursorcolumn " disable column hightlight
 "set nocursorline  " disable line hightlight
 call matchadd('ColorColumn', '\%81v') " hightlight characters at column 81
@@ -153,3 +154,26 @@ nmap ga <Plug>(EasyAlign)
 " }}}
 " }}}
 
+" Startify {{{
+
+let g:startify_bookmarks = [
+      \ '~/app1/',
+      \ '~/app2'
+      \ ]
+
+let g:startify_lists = [
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'files',     'header': ['   MRU']            },
+      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
+
+" autocmd VimEnter *
+"             \   if !argc()
+"             \ |   Startify
+"             \ |   NERDTree
+"             \ |   wincmd w
+"             \ | endif
+
+" }}}
