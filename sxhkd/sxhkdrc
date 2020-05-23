@@ -8,6 +8,9 @@ super + Return
     #urxvt
     #urxvt256c-ml
 
+super + e
+    neovide
+
 # program launcher
 super + d
     rofi -show drun -show-icons
@@ -38,7 +41,8 @@ XF86AudioNext
     playerctl --all-players next
 XF86AudioPrev
     playerctl --all-players previous
-
+@XF86Launch0
+    xdotool search --classname 'matrix.arquivei.com.br' windowactivate key --clearmodifiers 'm'
 #
 # bspwm hotkeys
 #
@@ -142,14 +146,16 @@ super + Tab
 
 alt + Tab
     rofi -show window -show-icons -sort -kb-cancel 'Alt+Escape,Escape' -kb-accept-entry '!Alt-Tab,!Alt_L,!Alt+Alt_L,Return' -kb-row-down 'Alt+Tab,Alt+Down' -kb-row-up 'Alt+ISO_Left_Tab,Alt+Shift+Tab,Alt+Up'
+
 #bspc node -f last
 
 
 # focus the older or newer node in the focus history
 super + {o,i}
-    bspc wm -h off; \
-    bspc node {older,newer} -f; \
-    bspc wm -h on
+    bspc node {older,newer} -f
+    # bspc wm -h off; \
+    # bspc node {older,newer} -f; \
+    # bspc wm -h on
 
 # focus the given desktop
 super + {1-9,0}

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+xrandr --auto
+autorandr --change
+
+xrdb -I"$HOME" ~/.Xresources
+
+#xsetroot -solid "#333333" &
+xsetroot -mod 100 100 -bg "#333333" -fg "#222222"
+xsetroot -cursor_name spider
+
+clipster -d &
+sxhkd &
+dunst &

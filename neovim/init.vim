@@ -13,6 +13,7 @@ Plug '~/.local/share/nvim/plugged-manual/vis'
 " Plug 'tpope/vim-abolish'
 " Plug 'tpope/vim-eunuch'
 " Plug 'tpope/vim-vinegar'
+" Plug 'arp242/confirm_quit.vim'
 Plug 'ap/vim-buftabline'
 Plug 'chriskempson/base16-vim'
 Plug 'editorconfig/editorconfig-vim'
@@ -27,8 +28,14 @@ Plug 'sheerun/vim-polyglot'
 Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-dadbod'
+" Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'skywind3000/gutentags_plus'
+Plug 'vimwiki/vimwiki'
+Plug 'APZelos/blamer.nvim'
+Plug 'majutsushi/tagbar'
 
 call plug#end()
 
@@ -37,7 +44,7 @@ packadd vimball
 filetype off              " do not load $runtime/filetype.vim files
 filetype plugin indent on " auto load plugin filetypes and indent specs
 syntax on                 " enable syntax highlighting
-
+set nocompatible
 let g:polyglot_disabled = ['latex']
 
 " }}}
@@ -54,9 +61,13 @@ set ttyfast                    " improves performance of redrawing by signalizin
 set wildmenu                   " show a menu for tab completion
 set modeline                   " allow lines on extremities to contain vim config - `vim:foldmethod=marker:foldlevel=0`
 set modelines=2                " amount of lines to check on extremities for modelines - 2 at least because of shebang
+set hidden
 
-autocmd BufWritePre * %s/\s\+$//e
+command! -bar MTrimWhiteSpace %s/\s\+$//e
+autocmd BufWritePre * MTrimWhiteSpace
 
+let NERDTreeShowHidden=1
+let g:blamer_enabled=1
 " }}}
 
 " Cursor Configuration {{{
@@ -82,10 +93,10 @@ set showtabline=2  " always shows tab line independent of having more than one
 set list           " show invisible characters
 " invisible characters representation
 set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:%
-" set listchars+=eol:¬,space:·
-set listchars+=space:·
+set listchars+=eol:¬,space:·
+" set listchars+=space:·
 
-set guifont=Fira\ Code:h14
+set guifont=Fira\ Code:h16
 
 " }}}
 
@@ -144,6 +155,8 @@ nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-g> :Rg<CR>
 nnoremap <silent> <M-p> :Buffers<CR>
 
+" }}}
+
 " EasyAlign {{{
 
 " start interactive in visual mode (e.g. vipga)
@@ -152,6 +165,11 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " }}}
+
+" DadBod {{{
+
+source ~/.config/nvim/dadbod.vim
+
 " }}}
 
 " Startify {{{
@@ -176,4 +194,60 @@ let g:startify_lists = [
 "             \ |   wincmd w
 "             \ | endif
 
+" }}}
+
+" Lightline {{{
+
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
+
+" }}}
+
+" Gutentags {{{
+
+" enable gtags module
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+
+" config project root markers.
+let g:gutentags_project_root = ['.root']
+
+" generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" change focus to quickfix window after search (optional).
+let g:gutentags_plus_switch = 1
+
+" }}}
+
+" VimWiki {{{
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" }}}
+
+" FZF {{{
+function! s:list_buffers()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+command! BD call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))
 " }}}

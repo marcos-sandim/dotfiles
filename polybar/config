@@ -62,7 +62,7 @@ font-5 = Font Awesome 5 Free Solid:style=Solid:pixelsize=10;1
 
 modules-left = bspwm
 modules-center = title
-modules-right = pulseaudio xkeyboard memory cpu temperature wlan eth battery date powermenu
+modules-right = pulseaudio keyboardvariant memory cpu temperature wlan eth battery date powermenu
 ;notification-center
 
 tray-position = right
@@ -117,6 +117,17 @@ label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
 label-indicator-underline = ${colors.secondary}
+
+[module/keyboardvariant]
+type = custom/script
+
+# exec = setxkbmap -query | (grep variant || printf "\n") | sed -E 's/variant:\s*(.*)/[\1]/'
+exec = setxkbmap -query | (grep -E '(layout|variant)' || printf "\n") | sed -E 's/layout:\s*(.*)/\1 /' | sed -E 's/variant:\s*(.*)/[\1]/ ' | tr -d "\n"
+interval = 5
+
+format-prefix = " "
+format-underline = ${colors.secondary}
+format-prefix-foreground = ${colors.foreground-alt}
 
 [module/filesystem]
 type = internal/fs
@@ -374,6 +385,9 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
+use-ui-max = true
+click-right = pavucontrol &
+
 [module/alsa]
 type = internal/alsa
 
@@ -457,6 +471,8 @@ ramp-0 = 
 ramp-1 = 
 ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
+
+hwmon-path=/sys/devices/virtual/hwmon/hwmon4/temp1_input
 
 [module/powermenu]
 type = custom/menu

@@ -23,13 +23,9 @@ fi
 
 wmname LG3D
 
-killall sxhkd; sxhkd &
+# killall sxhkd; sxhkd &
 
 $HOME/.config/polybar/launch.sh &
-
-#xsetroot -solid "#333333" &
-xsetroot -mod 100 100 -bg "#333333" -fg "#222222"
-xsetroot -cursor_name spider
 
 #urxvt256c-ml &
 
@@ -81,6 +77,8 @@ bspc rule -a jetbrains-goland desktop='1'
 bspc rule -a Postman desktop='4'
 bspc rule -a jetbrains-pycharm desktop='1'
 bspc rule -a 'MATLAB R2015a' desktop='3'
+# bspc rule -a 'Spotify' desktop='7'
+# bspc rule -a 'spotify' desktop='7'
 
 bspc rule -a Nautilus state=floating
 bspc rule -a KeePassXC state=floating
@@ -88,6 +86,7 @@ bspc rule -a keepassxc state=floating
 bspc rule -a Gcr-viewer state=floating
 #bspc rule -a copyq state=floating
 bspc rule -a Zathura state=tiled
+bspc rule -a 'jetbrains-toolbox' state=floating
 
 xinput --set-prop 'ELAN0504:01 04F3:3091 Touchpad' "libinput Natural Scrolling Enabled" 1
 xinput --set-prop 'ELAN0504:01 04F3:3091 Touchpad' "libinput Tapping Enabled" 1
@@ -103,7 +102,8 @@ killall bspc
 nm-applet &
 lxpolkit &
 #dropbox start &
-maestral start &/
+maestral start &
 rambox &
 xautolock -time 15 -locker 'i3lock -i /tmp/wallpaper.png -c 222222' &
 killall clipster; clipster -d
+# dunst &

@@ -1,6 +1,9 @@
 #!/bin/sh
+set -xe
 
 setxkbmap -layout us -variant intl
+
+exit 0
 
 # re-execute this script as "$xuser" if that's not root, in case the root user is not permitted to access the X session.
 xuser=$(ps -C Xorg -C X -ouser=)
@@ -16,7 +19,7 @@ xinput_dev_id() {
 # In our case the USB:ID was shown in the `xinput list` output,
 # but this is unusual and you may have to match
 # on names or even correlate with /dev/input/by-id/*
-device_id=$(xinput_dev_id 'Cooler Master Technology Inc. MasterKeys Pro M Intelligent RGB')
+device_id=$(xinput_dev_id 'Cooler Master Technology Inc. MasterKeys Pro M Intelligent RGB Keyboard')
 #echo $device_id
 [ "$device_id" ] || exit
 
@@ -26,6 +29,7 @@ mkdir -p /tmp/xkb/symbols
 cat >/tmp/xkb/symbols/custom <<\EOF
 xkb_symbols "mysymbols" {
     key <KPEN> { [ Return ] };
+    key <AB11> { [ XF86Launch0 ] };
 };
 EOF
 
@@ -33,5 +37,5 @@ EOF
 # the above key mappings, and apply to the particular device.
 # Note xkbcomp >= 1.2.1 is needed to support this
 setxkbmap -device $device_id -print |
-sed 's/\(xkb_symbols.*\)"/\1+custom(mysymbols)"/' |
-xkbcomp -I/tmp/xkb -i $device_id -synch - $DISPLAY 2>/dev/null
+sed 's/\(xkb_symbols.*\)"/\1+custom(mysymbols)"/' | #sed -e '/xkb_keycodes/s/"[[:space:]]/+local&/' |
+xkbcomp -I/tmp/xkb -i $device_id -synch - $DISPLAY # 2>/dev/null
