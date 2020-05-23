@@ -36,6 +36,10 @@ Plug 'skywind3000/gutentags_plus'
 Plug 'vimwiki/vimwiki'
 Plug 'APZelos/blamer.nvim'
 Plug 'majutsushi/tagbar'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 call plug#end()
 
@@ -250,4 +254,10 @@ command! BD call fzf#run(fzf#wrap({
   \ 'sink*': { lines -> s:delete_buffers(lines) },
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
 \ }))
+" }}}
+
+" LSP {{{
+let g:LanguageClient_serverCommands = {
+\ 'rust': ['rust-analyzer'],
+\ }
 " }}}
