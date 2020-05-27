@@ -59,6 +59,7 @@ font-2 = Siji:style=Regular:pixelsize=10;1
 font-3 = Font Awesome 5 Free Regular:style=Regular:pixelsize=10;1
 font-4 = Font Awesome 5 Brands Regular:style=Regular:pixelsize=10;1
 font-5 = Font Awesome 5 Free Solid:style=Solid:pixelsize=10;1
+font-6 = Weather Icons:size=12;1
 
 modules-left = bspwm
 modules-center = title
@@ -89,7 +90,7 @@ monitor = ${env:MONITOR:eDP-1}
 
 modules-left = bspwm
 modules-center = player-mpris-tail
-modules-right = filesystem
+modules-right = openweathermap-fullfeatured filesystem
 
 tray-position = none
 
@@ -572,3 +573,9 @@ label = %output%
 click-left = ~/repos/polybar-scripts/polybar-scripts/player-mpris-tail/player-mpris-tail.py play-pause
 click-right = ~/repos/polybar-scripts/polybar-scripts/player-mpris-tail/player-mpris-tail.py next
 click-middle = ~/repos/polybar-scripts/polybar-scripts/player-mpris-tail/player-mpris-tail.py previous
+
+[module/openweathermap-fullfeatured]
+type = custom/script
+exec = ~/repos/polybar-scripts/polybar-scripts/openweathermap-fullfeatured/openweathermap-fullfeatured.sh
+interval = 600
+label-font = 7
