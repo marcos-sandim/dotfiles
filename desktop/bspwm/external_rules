@@ -1,0 +1,27 @@
+#! /bin/sh
+
+wid=$1
+class=$(echo "$2" | tr '[:upper:]' '[:lower:]')
+instance=$3
+consequences=$4
+title=$(xtitle "$wid")
+
+# echo "$wid - $class - $instance - $title - $consequences" >> /tmp/ruleslog.log
+
+case "$class" in
+  firefox)
+    title=$(xtitle "$wid")
+    if [ "$title" = "Picture-in-Picture" ] ; then
+      echo "state=floating"
+    fi
+    ;;
+  qalculate-gtk)
+    echo "state=floating"
+    ;;
+  '')
+    title=$(xtitle "$wid")
+    if [ "$title" = "Spotify" ] ; then
+      echo "desktop=7"
+    fi
+    ;;
+esac

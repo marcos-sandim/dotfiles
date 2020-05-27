@@ -1,6 +1,14 @@
 " vim:foldmethod=marker:foldlevel=0
 set shell=/bin/sh
 
+" Function to source only if file exists {{{
+function! SourceIfExists(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  endif
+endfunction
+" }}}
+
 " Plugins {{{
 call plug#begin(stdpath('data') . '/plugged')
 
@@ -172,7 +180,7 @@ nmap ga <Plug>(EasyAlign)
 
 " DadBod {{{
 
-source ~/.config/nvim/dadbod.vim
+call SourceIfExists("~/.config/nvim/dadbod.vim")
 
 " }}}
 

@@ -19,7 +19,8 @@ super + shift + d
     rofi -show run -show-icons -run-command 'alacritty --title \{cmd\} -e \{cmd\}'
 
 super + shift + c
-	rofi -modi calc -show calc -no-show-match -no-sort -terse
+	qalculate-gtk
+  # rofi -modi calc -show calc -no-show-match -no-sort -terse
 
 # make sxhkd reload its configuration files:
 super + Escape
