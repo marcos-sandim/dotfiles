@@ -18,32 +18,33 @@ Plug '~/.local/share/nvim/plugged-manual/vis'
 
 " Plug 'dense-analysis/ale'
 " Plug 'junegunn/vim-easy-align'
-" Plug 'tpope/vim-abolish'
 " Plug 'tpope/vim-eunuch'
 " Plug 'tpope/vim-vinegar'
 " Plug 'arp242/confirm_quit.vim'
 Plug 'ap/vim-buftabline'
+Plug 'APZelos/blamer.nvim'
 Plug 'chriskempson/base16-vim'
+Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'lervag/vimtex'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'mhinz/vim-startify'
 Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
+Plug 'skywind3000/gutentags_plus'
 Plug 'svermeulen/vim-easyclip'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-dadbod'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'skywind3000/gutentags_plus'
 Plug 'vimwiki/vimwiki'
-Plug 'APZelos/blamer.nvim'
-Plug 'majutsushi/tagbar'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -108,7 +109,14 @@ set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:%
 set listchars+=eol:¬,space:·
 " set listchars+=space:·
 
+" }}}
+
+" Neovide {{{
+
 set guifont=Fira\ Code:h16
+let g:neovide_cursor_animation_length=5.0
+let g:neovide_cursor_trail_length=8.0
+let g:neovide_cursor_vfx_mode = "railgun"
 
 " }}}
 
@@ -187,8 +195,10 @@ call SourceIfExists("~/.config/nvim/dadbod.vim")
 " Startify {{{
 
 let g:startify_bookmarks = [
+      \ '~/Scratchpads',
       \ '~/app1/',
       \ '~/app2'
+      \ '~/.config'
       \ ]
 
 let g:startify_lists = [

@@ -11,4 +11,4 @@ xsetroot -cursor_name spider
 
 clipster -d &
 sxhkd &
-dunst &
+# dunst &

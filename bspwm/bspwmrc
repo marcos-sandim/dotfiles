@@ -89,6 +89,8 @@ bspc rule -a Gcr-viewer state=floating
 bspc rule -a Zathura state=tiled
 bspc rule -a 'jetbrains-toolbox' state=floating
 
+bspc config external_rules_command ~/repos/dotfiles/desktop/bspwm/external_rules
+
 xinput --set-prop 'ELAN0504:01 04F3:3091 Touchpad' "libinput Natural Scrolling Enabled" 1
 xinput --set-prop 'ELAN0504:01 04F3:3091 Touchpad' "libinput Tapping Enabled" 1
 xinput --set-prop "MX Master Mouse" "libinput Natural Scrolling Enabled" 1

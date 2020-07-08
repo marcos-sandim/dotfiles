@@ -22,6 +22,9 @@ super + shift + c
 	qalculate-gtk
   # rofi -modi calc -show calc -no-show-match -no-sort -terse
 
+super + shift + s
+   echo "working\nbrb\nlunch\nooo" | rofi -dmenu | xargs $HOME/.local/bin/set_lack_status.sh
+
 # make sxhkd reload its configuration files:
 super + Escape
     pkill -USR1 -x sxhkd
@@ -44,6 +47,9 @@ XF86AudioPrev
     playerctl --all-players previous
 @XF86Launch0
     xdotool search --classname 'matrix.arquivei.com.br' windowactivate key --clearmodifiers 'm'
+# XF86Launch0
+#   pacmd set-source-mute 1 1
+
 #
 # bspwm hotkeys
 #
@@ -117,8 +123,8 @@ super + {comma,period}
 super + c
     ~/.local/bin/roficlip
 
-super + shift + c
-    rofi -show calc -modi calc -no-show-match -no-sort -terse -calc-command 'echo -n "\{result\}" | xclip -selection clipboard'
+#super + shift + c
+#    rofi -show calc -modi calc -no-show-match -no-sort -terse -calc-command 'echo -n "\{result\}" | xclip -selection clipboard'
 
 # Print screen
 # Without the sleep scrot crashes with:
@@ -165,8 +171,9 @@ super + {1-9,0}
 # send to the given desktop and focus it
 super + shift + {1-9,0}
     D='{1-9,10}'; \
+    N=$(bspc query -N -n); \
     bspc node -d $D; \
-    bspc desktop -f $D
+    bspc node -f $N
 
 #
 # preselect
@@ -223,3 +230,9 @@ super + ctrl + {m,x,y,z}
 
 super + space
     ~/repos/dotfiles/scripts/open_scratch.sh
+
+ctrl + space
+    dunstctl close
+
+ctrl + alt + space
+    dunstctl history-pop

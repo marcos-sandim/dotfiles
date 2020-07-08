@@ -62,7 +62,7 @@ font-5 = Font Awesome 5 Free Solid:style=Solid:pixelsize=10;1
 font-6 = Weather Icons:size=12;1
 
 modules-left = bspwm
-modules-center = title
+modules-center = title pulseaudio-microphone
 modules-right = pulseaudio keyboardvariant memory cpu temperature wlan eth battery date powermenu
 ;notification-center
 
@@ -579,3 +579,10 @@ type = custom/script
 exec = ~/repos/polybar-scripts/polybar-scripts/openweathermap-fullfeatured/openweathermap-fullfeatured.sh
 interval = 600
 label-font = 7
+
+[module/pulseaudio-microphone]
+type = custom/script
+exec = ~/repos/polybar-scripts/polybar-scripts/pulseaudio-microphone/pulseaudio-microphone.sh
+tail = true
+click-left = ~/repos/polybar-scripts/polybar-scripts/pulseaudio-microphone/pulseaudio-microphone.sh --toggle &
+

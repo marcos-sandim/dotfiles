@@ -15,7 +15,7 @@ case "$class" in
       echo "state=floating"
     fi
     ;;
-  qalculate-gtk)
+  qalculate-gtk|"toggl desktop")
     echo "state=floating"
     ;;
   '')
