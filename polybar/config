@@ -62,7 +62,7 @@ font-5 = Font Awesome 5 Free Solid:style=Solid:pixelsize=10;1
 font-6 = Weather Icons:size=12;1
 
 modules-left = bspwm
-modules-center = title pulseaudio-microphone
+modules-center = title pulseaudio-microphone disable-integrated-keyboard
 modules-right = pulseaudio keyboardvariant memory cpu temperature wlan eth battery date powermenu
 ;notification-center
 
@@ -585,4 +585,11 @@ type = custom/script
 exec = ~/repos/polybar-scripts/polybar-scripts/pulseaudio-microphone/pulseaudio-microphone.sh
 tail = true
 click-left = ~/repos/polybar-scripts/polybar-scripts/pulseaudio-microphone/pulseaudio-microphone.sh --toggle &
+
+[module/disable-integrated-keyboard]
+type = custom/script
+exec = xinput list | grep 'AT Translated Set 2 keyboard' | sed -ne 's/.*\(\[.*\]\).*/\1/p'
+interval = 5
+click-left = xinput float 'AT Translated Set 2 keyboard'
+click-right = xinput reattach 'AT Translated Set 2 keyboard' 'Virtual core keyboard'
 
