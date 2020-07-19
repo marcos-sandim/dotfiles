@@ -25,6 +25,7 @@ Plug '~/.local/share/nvim/plugged-manual/vis'
 " Plug 'tpope/vim-vinegar'
 Plug 'APZelos/blamer.nvim'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+Plug 'arthurxavierx/vim-caser'
 Plug 'chriskempson/base16-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
@@ -38,7 +39,6 @@ Plug 'mhinz/vim-startify'
 Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/gutentags_plus'
-Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-dispatch'
@@ -211,7 +211,7 @@ nmap <leader>db  <Plug>(DBExe)
 omap <leader>db  <Plug>(DBExe)
 nmap <leader>dbb <Plug>(DBExeLine)
 
-nmap <leader>p vip<leader>db<CR>
+nmap <leader>p m'vip<leader>db<CR><C-o>
 "
 " }}}
 

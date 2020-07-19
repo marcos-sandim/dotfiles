@@ -19,7 +19,8 @@ xinput_dev_id() {
 # In our case the USB:ID was shown in the `xinput list` output,
 # but this is unusual and you may have to match
 # on names or even correlate with /dev/input/by-id/*
-device_id=$(xinput_dev_id 'Cooler Master Technology Inc. MasterKeys Pro M Intelligent RGB Keyboard')
+# device_id=$(xinput_dev_id 'Cooler Master Technology Inc. MasterKeys Pro M Intelligent RGB Keyboard')
+device_id=$(xinput_dev_id 'Cooler Master Technology Inc. MasterKeys Pro M Intelligent RGB')
 #echo $device_id
 [ "$device_id" ] || exit
 

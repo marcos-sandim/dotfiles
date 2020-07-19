@@ -45,8 +45,9 @@ XF86AudioNext
     playerctl --all-players next
 XF86AudioPrev
     playerctl --all-players previous
-@XF86Launch0
-    xdotool search --classname 'matrix.arquivei.com.br' windowactivate key --clearmodifiers 'm'
+XF86Launch0
+    ~/repos/polybar-scripts/polybar-scripts/pulseaudio-microphone/pulseaudio-microphone.sh --toggle &
+    #xdotool search --classname 'matrix.arquivei.com.br' windowactivate key --clearmodifiers 'm'
 # XF86Launch0
 #   pacmd set-source-mute 1 1
 

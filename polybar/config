@@ -588,8 +588,9 @@ click-left = ~/repos/polybar-scripts/polybar-scripts/pulseaudio-microphone/pulse
 
 [module/disable-integrated-keyboard]
 type = custom/script
-exec = xinput list | grep 'AT Translated Set 2 keyboard' | sed -ne 's/.*\(\[.*\]\).*/\1/p'
+; exec = xinput list | grep 'AT Translated Set 2 keyboard' | sed -ne 's/.*\(\[.*\]\).*/\1/p'
+exec = xinput list | grep -e 'AT Translated Set 2 keyboard\|DELL0829:00 06CB:7E92 Touchpad' | sed -ne 's/.*\(\[.*\]\).*/\1/p' | tr -d '\n'
 interval = 5
-click-left = xinput float 'AT Translated Set 2 keyboard'
-click-right = xinput reattach 'AT Translated Set 2 keyboard' 'Virtual core keyboard'
+click-left = xinput float 'AT Translated Set 2 keyboard' ; xinput float 'DELL0829:00 06CB:7E92 Touchpad'
+click-right = xinput reattach 'AT Translated Set 2 keyboard' 'Virtual core keyboard' ; xinput reattach 'DELL0829:00 06CB:7E92 Touchpad' 'Virtual core pointer'
 
