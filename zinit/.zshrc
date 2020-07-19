@@ -60,9 +60,8 @@ export FZF_ALT_C_COMMAND="fd --type directory --follow --hidden --exclude .git"
 export FZF_CTRL_T_COMMAND="fd --type file --follow --hidden --exclude .git"
 
 # Editor
-VISUAL='subl --wait'
 EDITOR=editor
-export VISUAL EDITOR
+export EDITOR
 
 # Aliases
 #alias la='ls -A'
@@ -74,13 +73,13 @@ alias please='sudo'
 alias git-current-branch="git branch | grep \* | cut -d ' ' -f2"
 #alias kc='kubectl'
 alias nvipe='vipe > /dev/null'
-alias cd='cd -P'
+# alias cd='cd -P'
 alias mux='tmuxinator'
 
 alias pacinstall="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias yayinstall="yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S"
 
-alias dnfinstall="dnf list --all | awk '{print \$1}' | fzf -m --preview 'dnf repoquery -i {1}' | xargs -r sudo dnf install -y"
+# alias dnfinstall="dnf list --all | awk '{print \$1}' | fzf -m --preview 'dnf repoquery -i {1}' | xargs -r sudo dnf install -y"
 
 # Functions
 docker_logs_jq() {

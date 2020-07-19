@@ -20,8 +20,18 @@ fi
 
 #export GTK_IM_MODULE=cedilla
 
+export QT_STYLE_OVERRIDE=gtk
+export QT_SELECT=qt5
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_SCREEN_SCALE_FACTORS="1;1"
+
+# Disable HiDPI Scaling - Fix font issues with Alacritty (https://github.com/jwilm/alacritty/issues/1501)
+export WINIT_HIDPI_FACTOR=1
+export WINIT_X11_SCALE_FACTOR=1
+
 export TERMINAL=alacritty
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 
 # export FZF_DEFAULT_COMMAND='fd --type f --no-ignore-vcs'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --no-ignore-vcs'

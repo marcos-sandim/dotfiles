@@ -16,13 +16,15 @@ Plug '/usr/local/opt/fzf'
 
 Plug '~/.local/share/nvim/plugged-manual/vis'
 
+" Plug 'ap/vim-buftabline'
+" Plug 'arp242/confirm_quit.vim'
 " Plug 'dense-analysis/ale'
 " Plug 'junegunn/vim-easy-align'
+" Plug 'svermeulen/vim-easyclip'
 " Plug 'tpope/vim-eunuch'
 " Plug 'tpope/vim-vinegar'
-" Plug 'arp242/confirm_quit.vim'
-Plug 'ap/vim-buftabline'
 Plug 'APZelos/blamer.nvim'
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'chriskempson/base16-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
@@ -36,7 +38,6 @@ Plug 'mhinz/vim-startify'
 Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/gutentags_plus'
-Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dadbod'
@@ -45,10 +46,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 
 call plug#end()
 
@@ -113,10 +110,11 @@ set listchars+=eol:¬,space:·
 
 " Neovide {{{
 
-set guifont=Fira\ Code:h16
-let g:neovide_cursor_animation_length=5.0
+set guifont=Fira\ Code:h12
+let g:neovide_cursor_animation_length=0.1
 let g:neovide_cursor_trail_length=8.0
 let g:neovide_cursor_vfx_mode = "railgun"
+let g:neovide_refresh_rate=60
 
 " }}}
 
@@ -148,7 +146,7 @@ set hlsearch    " highlight found searches
 set ignorecase  " search case insensitive...
 set smartcase   " ... but not when search pattern contains upper case characters
 
-command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --no-ignore --hidden --smart-case '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --no-ignore-vcs --hidden --smart-case '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
 
 " }}}
 
@@ -188,18 +186,38 @@ nmap ga <Plug>(EasyAlign)
 
 " DadBod {{{
 
-call SourceIfExists("~/.config/nvim/dadbod.vim")
+call SourceIfExists("~/.config/nvim/dadbods.vim")
 
+function! s:DBSelected(id)
+  echomsg 'selected: ' . a:id
+  if a:id != -1
+    let t = filter(copy(g:dadbods), 'v:val.name == a:id')[0]
+    let b:db = t.url
+    echomsg 'DB ' . t.name . ' is selected.'
+  endif
+endfunc
+
+command! DBSelect :call fzf#run({
+      \ 'source': map(copy(g:dadbods), {k, v -> v.name}),
+      \ 'sink': function('s:DBSelected')
+      \} )
+
+xnoremap <expr> <Plug>(DBExe)     db#op_exec()
+nnoremap <expr> <Plug>(DBExe)     db#op_exec()
+nnoremap <expr> <Plug>(DBExeLine) db#op_exec() . '_'
+
+xmap <leader>db  <Plug>(DBExe)
+nmap <leader>db  <Plug>(DBExe)
+omap <leader>db  <Plug>(DBExe)
+nmap <leader>dbb <Plug>(DBExeLine)
+
+nmap <leader>p vip<leader>db<CR>
+"
 " }}}
 
 " Startify {{{
 
-let g:startify_bookmarks = [
-      \ '~/Scratchpads',
-      \ '~/app1/',
-      \ '~/app2'
-      \ '~/.config'
-      \ ]
+call SourceIfExists("~/.config/nvim/startify_bookmarks.vim")
 
 let g:startify_lists = [
       \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
@@ -272,6 +290,12 @@ command! BD call fzf#run(fzf#wrap({
   \ 'sink*': { lines -> s:delete_buffers(lines) },
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
 \ }))
+" }}}
+
+" {{{
+
+let g:vimtex_compiler_progname = 'nvr'
+
 " }}}
 
 " LSP {{{
