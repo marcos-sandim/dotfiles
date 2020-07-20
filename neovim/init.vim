@@ -12,7 +12,7 @@ endfunction
 " Plugins {{{
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug '/usr/local/opt/fzf'
+" Plug '/usr/local/opt/fzf'
 
 Plug '~/.local/share/nvim/plugged-manual/vis'
 
