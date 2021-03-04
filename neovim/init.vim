@@ -1,5 +1,5 @@
 " vim:foldmethod=marker:foldlevel=0
-set shell=/bin/sh
+set shell=/bin/zsh
 
 " Function to source only if file exists {{{
 function! SourceIfExists(file)
@@ -24,28 +24,35 @@ Plug '~/.local/share/nvim/plugged-manual/vis'
 " Plug 'tpope/vim-eunuch'
 " Plug 'tpope/vim-vinegar'
 Plug 'APZelos/blamer.nvim'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+" Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+Plug 'airblade/vim-gitgutter'
 Plug 'arthurxavierx/vim-caser'
 Plug 'chriskempson/base16-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
-Plug 'lervag/vimtex'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'lervag/vimtex'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'mhinz/vim-startify'
-Plug 'preservim/nerdtree'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'preservim/nerdtree'
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
 Plug 'sheerun/vim-polyglot'
-Plug 'skywind3000/gutentags_plus'
+" Plug 'skywind3000/gutentags_plus'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-characterize'
 Plug 'vimwiki/vimwiki'
+Plug 'vim-scripts/RltvNmbr.vim'
+Plug 'chrisbra/Colorizer'
+Plug 'ruby-formatter/rufo-vim'
 
 call plug#end()
 
@@ -55,7 +62,7 @@ filetype off              " do not load $runtime/filetype.vim files
 filetype plugin indent on " auto load plugin filetypes and indent specs
 syntax on                 " enable syntax highlighting
 set nocompatible
-let g:polyglot_disabled = ['latex']
+" let g:polyglot_disabled = ['latex']
 
 " }}}
 
@@ -88,6 +95,9 @@ let &t_EI = "\<Esc>[2 q" " block on everything else
 
 set whichwrap+=<,>,h,l,[,]
 
+" autocmd InsertLeave,WinEnter * let &l:foldmethod=g:oldfoldmethod
+" autocmd InsertEnter,WinLeave * let g:oldfoldmethod=&l:foldmethod | setlocal foldmethod=manual
+
 " }}}
 
 " Rendering Settings {{{
@@ -110,7 +120,8 @@ set listchars+=eol:¬,space:·
 
 " Neovide {{{
 
-set guifont=Fira\ Code:h12
+set guifont=Fira\ Code:h14
+set mouse=a
 let g:neovide_cursor_animation_length=0.1
 let g:neovide_cursor_trail_length=8.0
 let g:neovide_cursor_vfx_mode = "railgun"
@@ -146,7 +157,16 @@ set hlsearch    " highlight found searches
 set ignorecase  " search case insensitive...
 set smartcase   " ... but not when search pattern contains upper case characters
 
-command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --no-ignore-vcs --hidden --smart-case '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
+" command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --no-ignore-vcs --hidden --smart-case '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 " }}}
 
@@ -170,18 +190,13 @@ set completeopt=menuone,noinsert,preview
 nnoremap <silent> <Space> :nohl<CR>
 nnoremap <silent> <F5> :exe 'source '.stdpath('config').'/init.vim'<CR>
 nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <C-g> :Rg<CR>
+nnoremap <silent> <C-g> :RG<CR>
 nnoremap <silent> <M-p> :Buffers<CR>
 
-" }}}
+vmap <leader>m "adma
+vmap <leader>t "bd"aP`a"bP
 
-" EasyAlign {{{
-
-" start interactive in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" start interactive for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
+nnoremap <leader>c :let @+=join([expand('%:p'), line('.')], ':')<CR>
 " }}}
 
 " DadBod {{{
@@ -211,7 +226,8 @@ nmap <leader>db  <Plug>(DBExe)
 omap <leader>db  <Plug>(DBExe)
 nmap <leader>dbb <Plug>(DBExeLine)
 
-nmap <leader>p m'vip<leader>db<CR><C-o>
+" nmap <leader>p m'vip<leader>db<CR><C-o>
+nmap <leader>p m'vip<Plug>(DBExe)<CR><C-o>
 "
 " }}}
 
@@ -294,12 +310,19 @@ command! BD call fzf#run(fzf#wrap({
 
 " {{{
 
-let g:vimtex_compiler_progname = 'nvr'
+" let g:vimtex_compiler_progname = 'nvr'
 
 " }}}
 
 " LSP {{{
-let g:LanguageClient_serverCommands = {
-\ 'rust': ['rust-analyzer'],
-\ }
+" let g:LanguageClient_serverCommands = {
+" \ 'rust': ['rust-analyzer'],
+" \ }
+
+call SourceIfExists("~/.config/nvim/coc.vim")
+
+" }}}
+
+" Vim-visual-multi {{{
+let g:VM_quit_after_leaving_insert_mode=1
 " }}}

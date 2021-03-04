@@ -10,7 +10,6 @@ title=$(xtitle "$wid")
 
 case "$class" in
   firefox)
-    title=$(xtitle "$wid")
     if [ "$title" = "Picture-in-Picture" ] ; then
       echo "state=floating"
     fi
@@ -18,10 +17,19 @@ case "$class" in
   qalculate-gtk|"toggl desktop")
     echo "state=floating"
     ;;
-  '')
-    title=$(xtitle "$wid")
-    if [ "$title" = "Spotify" ] ; then
-      echo "desktop=7"
+  slack)
+    # echo "slack - #$title#" >> /tmp/ruleslog.log
+    echo "desktop=0"
+    if [ "$title" = "Slack | mini panel" ] ; then
+      # echo "hidden=on" >> /tmp/ruleslog.log
+      echo "hidden=on"
     fi
+    ;;
+  '')
+    case "$title" in
+      "Spotify")
+        echo "desktop=7"
+        ;;
+    esac
     ;;
 esac
